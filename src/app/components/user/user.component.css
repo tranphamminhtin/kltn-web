@@ -1,0 +1,25 @@
+.table td, select {
+  text-align: center;
+}
+.table th {
+  text-align: center;
+}
+select {
+  height: 35px !important;
+}
+
+th.email{
+  width: 225px;
+}
+th.name{
+  width: 225px;
+}
+th.numberphone{
+  width: 110px;
+}
+th.unit{
+  width: 185px;
+}
+th.address{
+  width: 195px;
+}

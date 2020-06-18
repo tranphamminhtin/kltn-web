@@ -1,0 +1,10 @@
+table {
+  width: 70%;
+  margin: auto;
+}
+.table td {
+  text-align: center;
+}
+.table th {
+  text-align: center;
+}

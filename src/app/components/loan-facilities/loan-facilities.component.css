@@ -1,0 +1,43 @@
+.table th,
+td {
+  text-align: center;
+}
+select {
+  height: 30px;
+  width: 50%;
+  margin-left: 100px;
+  text-align-last: center;
+  text-align: center;
+}
+.filter {
+  width: 97%;
+  margin: auto;
+}
+img {
+  width: 100px;
+  height: 100px;
+}
+.btn {
+  margin-top: 3px;
+}
+th.other {
+  width: 115px;
+}
+th.state {
+  width: 90px;
+}
+th.date {
+  width: 110px;
+}
+th.user {
+  width: 200px;
+}
+th.unit {
+  width: 200px;
+}
+th.room {
+  width: 115px;
+}
+th.name {
+  width: 290px;
+}

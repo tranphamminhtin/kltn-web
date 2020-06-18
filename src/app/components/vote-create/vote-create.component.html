@@ -1,0 +1,47 @@
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+  <div class="row">
+    <ol class="breadcrumb">
+      <li><a routerLink="/admin/home"> <em class="fa fa-home"></em>
+        </a></li>
+      <li class="active"><a routerLink="/admin/ql-san-pham">Quản lý thiết bị
+        </a></li>
+      <li><em class="fa"> Thêm đánh giá</em></li>
+    </ol>
+  </div>
+  <div class="widget">
+    <form (ngSubmit)="onSubmit();" [formGroup]="form">
+      <div class="title">
+        <h4>Nhập thông tin đánh giá</h4>
+      </div>
+      <div class="formRow form-group">
+        <label>Phần trăm (1-100)</label>
+        <div class="formRight">
+          <div class="col-xs-6">
+            <input class="form-control" type="number" formControlName="percent"
+              [ngClass]="{'is-invalid': form.get('percent').touched && form.get('percent').invalid}">
+            <div *ngIf="form.get('percent').touched && form.get('percent').invalid" class="invalid-feedback">
+              <div *ngIf="form.get('percent').errors.required">Vui lòng Phần trăm</div>
+              <div *ngIf="form.get('percent').errors.min">Phần trăm phải lớn hơn 0</div>
+              <div *ngIf="form.get('percent').errors.min">Phần trăm phải nhơ hơn hoặc bằng  100</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="formRow form-group">
+        <label>Ghi chú</label>
+        <div class="formRight">
+          <div class="col-xs-6">
+            <!-- <input class="form-control" type="text" formControlName="note" placeholder="Địa chỉ"> -->
+            <textarea class="form-control" formControlName="note" placeholder="Ghi chú"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="formRow" style="height: 50px">
+        <div class="formRight">
+          <button type="submit" class="btn btn-info">HOÀN TẤT</button>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </form>
+  </div>
+</div>

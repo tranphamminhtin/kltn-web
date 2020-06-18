@@ -1,0 +1,67 @@
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+  <div class="row">
+    <ol class="breadcrumb">
+      <li><a routerLink="/admin/home"> <em class="fa fa-home"></em>
+        </a></li>
+      <li class="active"><a routerLink="/admin/ql-san-pham">Quản lý thiết bị</a></li>
+      <li><em class="fa"> Đánh giá</em></li>
+    </ol>
+  </div>
+  <h3 style="text-align: center; color: black">Đánh giá</h3>
+  <br>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>%</th>
+        <th>Ghi chú</th>
+        <th>Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let vote of arrVotes">
+        <td>
+          <h3>
+            {{ vote.email }}
+          </h3>
+        </td>
+        <td>
+          <h3>
+            {{ vote.percent }}
+          </h3>
+        </td>
+        <td>
+          <h3>
+            {{ vote.note }}
+          </h3>
+        </td>
+        <td>
+          <div class="row">
+            <button type="button" class="btn btn-info " data-toggle="modal"
+              [attr.data-target]="'#myModalXoa'+vote._id"><i class="fa fa-times"></i> Xóa</button>
+            <div class="modal fade" id="myModalXoa{{ vote._id }}" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header" style="text-align: center;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Bạn chắc chắn xóa đánh giá này?
+                    </h4>
+                  </div>
+                  <div class="modal-body">
+                    <h3>
+                      {{'Đánh giá của ' + vote.email}}
+                    </h3>
+                  </div>
+                  <div class="modal-footer" style="text-align: center;">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="remove(vote._id);">Xác
+                      nhận</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

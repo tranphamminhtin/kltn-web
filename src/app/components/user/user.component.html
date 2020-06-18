@@ -1,0 +1,157 @@
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+  <div class="row">
+    <ol class="breadcrumb">
+      <li><a routerLink="/admin/home"> <em class="fa fa-home"></em>
+        </a></li>
+      <li class="active"><a routerLink="/admin/ql-khach-hang">Quản lý tài khoản</a></li>
+    </ol>
+    <a routerLink="/admin/them-quyen">
+      <button type="button" class="btn btn-primary btn-md" style="margin: 15px;"><i class="fa fa-plus"></i>
+        Tạo tài khoản</button>
+    </a>
+  </div>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <div class="btn-group btn-group-justified">
+        <a class="btn btn-info" [ngClass]="{'active': stateShow === 0}" (click)="show(0);">Admin</a>
+        <a class="btn btn-info" [ngClass]="{'active': stateShow === 1}" (click)="show(1);">Quản lý</a>
+        <a class="btn btn-info" [ngClass]="{'active': stateShow === 2}" (click)="show(2);">Người dùng</a>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th class="email">Email</th>
+            <th class="name">Họ tên</th>
+            <th class="numberphone">Số điện thoại</th>
+            <th class="unit">Đơn vị</th>
+            <th class="address">Địa chỉ</th>
+            <th class="other">Thao tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of arrFilters">
+            <td>{{ user.email }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.numberphone }}</td>
+            <td>{{ getNameUnit(user.unit) }}</td>
+            <td>{{ user.address }}</td>
+            <td>
+              <div class="row">
+                <button type="button" class="btn btn-info " data-toggle="modal"
+                  [attr.data-target]="'#myModalXoa'+user._id"><i class="fa fa-times"></i> Xóa</button>
+                <div class="modal fade" id="myModalXoa{{ user._id }}" role="dialog">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header" style="text-align: center;">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Bạn chắc chắn xóa tài khoản
+                        </h4>
+                      </div>
+                      <div class="modal-body">
+                        <h3>
+                          {{ user.email }}
+                        </h3>
+                      </div>
+                      <div class="modal-footer" style="text-align: center;">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"
+                          (click)="remove(user.email);">Xác
+                          nhận</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <button type="button" class="btn btn-info " data-toggle="modal"
+                  [attr.data-target]="'#myModalSua'+user._id"><i class="fa fa-edit"></i>
+                  Sửa</button>
+                <div>
+                  <div class="modal fade" id="myModalSua{{ user._id }}" role="dialog">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header" style="text-align: center;">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Sửa tài khoản</h4>
+                        </div>
+                        <div class="modal-body">
+                          <form class="panel">
+                            <div class="row ">
+                              <div class="col-md-4" style="margin-top: 30px">
+                                <p style="text-align: center">Email</p>
+                              </div>
+                              <div class=" col-md-8">
+                                <input name="email" type="text" class="form-control" disabled value="{{ user.email }}"
+                                  style=" width: 250px; height: 30px; margin-top: 25px" />
+                              </div>
+                            </div>
+                            <!-- <div class="row ">
+                              <div class="col-md-4" style="margin-top: 30px">
+                                <p style="text-align: center">Số điện thoại</p>
+                              </div>
+                              <div class=" col-md-8">
+                                <input name="numberphone" type="text" class="form-control"
+                                  [(ngModel)]="user.numberphone"
+                                  style=" width: 250px; height: 30px; margin-top: 25px" />
+                              </div>
+                            </div> -->
+                            <div class="row ">
+                              <div class="col-md-4" style="margin-top: 30px">
+                                <p style="text-align: center">Đơn vị</p>
+                              </div>
+                              <div class=" col-md-8">
+                                <select class="form-control" style=" width: 250px; height: 30px; margin-top: 25px"
+                                  [(ngModel)]="user.unit" name="unit">
+                                  <option *ngFor="let unit of arrUnits" value="{{ unit._id }}">
+                                    {{ unit.name }}
+                                  </option>
+                                  <!-- <option value="1">Nam
+                                  </option>
+                                  <option value="0">Nữ
+                                  </option> -->
+                                </select>
+                              </div>
+                            </div>
+                            <div class="row ">
+                              <div class="col-md-4" style="margin-top: 30px">
+                                <p style="text-align: center">Quyền</p>
+                              </div>
+                              <div class=" col-md-8">
+                                <select class="form-control" style=" width: 250px; height: 30px; margin-top: 25px"
+                                  [(ngModel)]="user.right" name="right">
+                                  <option value="0">ADMIN
+                                  </option>
+                                  <option value="1">Quản lý
+                                  </option>
+                                  <option value="2">Người dùng
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="modal-footer" style="text-align: center;">
+                          <button type="button" class="btn btn-primary" data-dismiss="modal"
+                            (click)="update(user);">Xác
+                            nhận</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

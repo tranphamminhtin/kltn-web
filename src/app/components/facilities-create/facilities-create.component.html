@@ -1,0 +1,112 @@
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+  <div class="row">
+    <ol class="breadcrumb">
+      <li><a routerLink="/admin/home"> <em class="fa fa-home"></em>
+        </a></li>
+      <li class="active"><a routerLink="/admin/ql-san-pham">Quản lý sản phẩm
+        </a></li>
+      <li><em class="fa"> {{show === 'CREATE'?'Thêm thiết bị':'Sửa thiết bị'}}</em></li>
+    </ol>
+  </div>
+  <div class="widget">
+    <form (ngSubmit)="onSubmit();" [formGroup]="form" id="add-nv-form">
+      <div class="title">
+        <h4>{{ show === 'CREATE'?'Nhập dữ liệu':'Sửa thiết bị' }}</h4>
+      </div>
+      <div class="col-xs-8">
+        <div class="formRow">
+          <label>Tên thiết bị </label>
+          <div class="formRight form-group">
+            <div class="col-xs-10">
+              <input class="form-control" type="text" formControlName="name"
+                [ngClass]="{'is-invalid': form.get('name').touched && form.get('name').invalid}">
+              <div *ngIf="form.get('name').touched && form.get('name').invalid" class="invalid-feedback">
+                <div>Vui lòng nhập tên thiết bị</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="formRow">
+          <label>Loại thiết bị</label>
+          <div class="formRight form-group">
+            <div class="col-xs-10">
+              <select class="form-control" formControlName="type"
+                [ngClass]="{'is-invalid': form.get('type').touched && form.get('type').invalid}">
+                <option *ngFor="let type of arrTypes" value="{{ type._id }}">{{ type.name }}
+                </option>
+              </select>
+              <div *ngIf="form.get('type').touched && form.get('type').invalid" class="invalid-feedback">
+                <div>Vui lòng chọn loại thiết bị</div>
+              </div>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="formRow">
+          <label>Nhà sản xuất</label>
+          <div class="formRight form-group">
+            <div class="col-xs-10">
+              <input class="form-control" type="text" formControlName="supplier"
+                [ngClass]="{'is-invalid': form.get('supplier').touched && form.get('supplier').invalid}">
+              <div *ngIf="form.get('supplier').touched && form.get('supplier').invalid" class="invalid-feedback">
+                <div>Vui lòng nhập nhà sản xuất</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="formRow">
+          <label>Ngày nhập</label>
+          <div class="formRight form-group">
+            <div class="col-xs-10">
+              <input class="form-control" type="date" formControlName='date'
+                [ngClass]="{'is-invalid': form.get('date').touched && form.get('date').invalid}">
+              <div *ngIf="form.get('date').touched && form.get('date').invalid" class="invalid-feedback">
+                <div>Vui lòng nhập ngày nhập</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="formRow">
+          <label>Ghi chú</label>
+          <div class="formRight form-group">
+            <div class="col-xs-10">
+              <input class="form-control" type="text" formControlName="note">
+            </div>
+          </div>
+        </div>
+        <div class="formRow form-group">
+          <label>Số lượng</label>
+          <div class="formRight">
+            <div class="col-xs-10">
+              <input class="form-control" type="number" formControlName="quantity"
+                [ngClass]="{'is-invalid': form.get('quantity').touched && form.get('quantity').invalid}">
+              <div *ngIf="form.get('quantity').touched && form.get('quantity').invalid" class="invalid-feedback">
+                <div>Vui lòng nhập số lượng</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <label class="label-img">Hình ảnh</label>
+        <div class="formRight">
+          <img [src]="imgSrc">
+          <input type="file" id="selectedFile" style="display: none;" accept="image/*" (change)="selectImage($event)" />
+          <br />
+          <input type="button" value="Chọn file" onclick="document.getElementById('selectedFile').click();"
+            style="margin-top: 10px;" *ngIf="show !=='UPDATE'"
+            [ngClass]="{'is-invalid': form.get('image').touched && form.get('image').invalid}" />
+          <div *ngIf="form.get('image').touched && form.get('image').invalid" class="invalid-feedback">
+            <div>Vui lòng chọn hình ảnh</div>
+          </div>
+        </div>
+      </div>
+      <div class="formRow" style="height: 50px">
+        <div class="formRight">
+          <button type="submit" class="btn btn-primary">HOÀN TẤT</button>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </form>
+  </div>
+</div>

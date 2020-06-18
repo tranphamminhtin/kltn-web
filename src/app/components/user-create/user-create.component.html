@@ -1,0 +1,127 @@
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+  <div class="row">
+    <ol class="breadcrumb">
+      <li><a routerLink="/admin/home"> <em class="fa fa-home"></em>
+        </a></li>
+      <li class="active"><a routerLink="/admin/ql-san-pham">Quản lý tài khoản
+        </a></li>
+      <li><em class="fa"> Thêm tài khoản</em></li>
+    </ol>
+  </div>
+  <div class="widget">
+    <form (ngSubmit)="onSubmit();" [formGroup]="form" id="add-nv-form">
+      <div class="title">
+        <h4>Nhập thông tin cá nhân</h4>
+      </div>
+      <div class="formRow form-group">
+        <label>Email</label>
+        <div class="formRight">
+          <div class="col-xs-6">
+            <input class="form-control" type="email" formControlName="email" placeholder="Email"
+              [ngClass]="{'is-invalid': form.get('email').touched && form.get('email').invalid}">
+            <div *ngIf="form.get('email').touched && form.get('email').invalid" class="invalid-feedback">
+              <div *ngIf="form.get('email').errors.required">Vui lòng nhập email</div>
+              <div *ngIf="form.get('email').errors.format">Email không hợp lệ</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="formRow form-group">
+        <label> Họ và tên </label>
+        <div class="formRight">
+          <div class="col-xs-6">
+            <input class="form-control" type="text" formControlName="name" placeholder="Họ và tên"
+              [ngClass]="{'is-invalid': form.get('name').touched && form.get('name').invalid}">
+            <div *ngIf="form.get('name').touched && form.get('name').invalid" class="invalid-feedback">
+              <div *ngIf="form.get('name').errors.required">Vui lòng nhập tên</div>
+              <div *ngIf="form.get('name').errors.format">Tên của bạn không hợp lệ</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="formRow form-group">
+        <label> Quyền </label>
+        <div class="form-group formRight">
+          <div class="col-xs-6">
+            <select class="form-control" formControlName="right"
+              [ngClass]="{'is-invalid': form.get('right').touched && form.get('right').invalid}">
+              <option value="0">ADMIN
+              </option>
+              <option value="1">Quản lý
+              </option>
+              <option value="2">Người dùng
+              </option>
+            </select>
+            <div *ngIf="form.get('right').touched && form.get('right').invalid" class="invalid-feedback">
+              <div *ngIf="form.get('right').errors.required">Vui lòng chọn quyền cho tài khoản</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="formRow form-group">
+        <label> Đơn vị </label>
+        <div class="form-group formRight">
+          <div class="col-xs-6">
+            <select class="form-control" formControlName="unit"
+              [ngClass]="{'is-invalid': form.get('unit').touched && form.get('unit').invalid}">
+              <option *ngFor="let unit of arrUnits" value="{{ unit._id }}">{{ unit.name }}
+              </option>
+            </select>
+            <div *ngIf="form.get('unit').touched && form.get('unit').invalid" class="invalid-feedback">
+              <div *ngIf="form.get('unit').errors.required">Vui lòng chọn đơn vị</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="formRow form-group">
+        <label>Số điện thoại</label>
+        <div class="formRight">
+          <div class="col-xs-6">
+            <input class="form-control" type="text" (keypress)="keyPress($event)" formControlName="numberphone"
+              [ngClass]="{'is-invalid': form.get('numberphone').touched && form.get('numberphone').invalid}">
+            <div *ngIf="form.get('numberphone').touched && form.get('numberphone').invalid" class="invalid-feedback">
+              <div *ngIf="form.get('numberphone').errors.required">Vui lòng nhập số điện thoại</div>
+              <div *ngIf="form.get('numberphone').errors.format">Số điện thoại không hợp lệ</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="formRow form-group">
+        <label>Giới tính</label>
+        <div class="form-group formRight">
+          <div class="col-xs-6">
+            <select class="form-control" formControlName="gender"
+            [ngClass]="{'is-invalid': form.get('gender').touched && form.get('gender').invalid}">
+              <option value="1">Nam
+              </option>
+              <option value="0">Nữ
+              </option>
+            </select>
+            <div *ngIf="form.get('gender').touched && form.get('gender').invalid" class="invalid-feedback">
+              <div *ngIf="form.get('gender').errors.required">Vui lòng chọn giới tính</div>
+            </div>
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="formRow form-group">
+        <label> Địa chỉ</label>
+        <div class="formRight">
+          <div class="col-xs-6">
+            <input class="form-control" type="text" formControlName="address" placeholder="Địa chỉ"
+              [ngClass]="{'is-invalid': form.get('address').touched && form.get('address').invalid}">
+            <div *ngIf="form.get('address').touched && form.get('address').invalid" class="invalid-feedback">
+              <div *ngIf="form.get('address').errors.required">Vui lòng nhập địa chỉ</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="formRow" style="height: 50px">
+        <div class="formRight">
+          <button type="submit" class="btn btn-info">HOÀN TẤT</button>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </form>
+  </div>
+</div>

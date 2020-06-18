@@ -1,0 +1,129 @@
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+  <div class="row">
+    <ol class="breadcrumb">
+      <li><a routerLink="/admin/home"> <em class="fa fa-home"></em>
+        </a></li>
+      <li class="active"><a routerLink="/admin/ql-san-pham">Quản lý phòng</a></li>
+    </ol>
+    <button id="input-hover" class="btn btn-primary btn-md" data-toggle="modal" [attr.data-target]="'#myModalthem'"
+      style="margin: 15px;"><i class="fa fa-plus"></i> Thêm
+    </button>
+  </div>
+  <h3 style="text-align: center; color: black">Phòng</h3>
+  <br>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Tên phòng</th>
+        <th>Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let room of arrRooms">
+        <td>
+          <h3>
+            {{ room._id }}
+          </h3>
+        </td>
+        <td>
+          <h3>
+            {{ room.name }}
+          </h3>
+        </td>
+        <td>
+          <div class="row">
+            <button type="button" class="btn btn-info " data-toggle="modal"
+              [attr.data-target]="'#myModalXoa'+room._id"><i class="fa fa-times"></i> Xóa</button>
+            <div class="modal fade" id="myModalXoa{{ room._id }}" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header" style="text-align: center;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Bạn chắc chắn xóa phòng?
+                    </h4>
+                  </div>
+                  <div class="modal-body">
+                    <h3>
+                      {{'Phòng ' + room.name}}
+                    </h3>
+                  </div>
+                  <div class="modal-footer" style="text-align: center;">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                      (click)="remove(room._id);">Xác
+                      nhận</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <button type="button" class="btn btn-info " data-toggle="modal"
+              [attr.data-target]="'#myModalSua'+room._id"><i class="fa fa-edit"></i>
+              Sửa</button>
+            <div>
+              <div class="modal fade" id="myModalSua{{ room._id }}" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header" style="text-align: center;">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Sửa tên phòng</h4>
+                    </div>
+                    <div class="modal-body">
+                      <form class="panel">
+                        <div class="row ">
+                          <div class="col-md-4" style="margin-top: 30px">
+                            <p style="text-align: center">Sửa phòng</p>
+                          </div>
+                          <div class=" col-md-8" style="width: 50px">
+                            <input type="text" [(ngModel)]="room.name" required class="form-group" name="name"
+                              style="text-align: center; width: 250px; height: 30px; margin-top: 22px" />
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer" style="text-align: center;">
+                      <button type="button" class="btn btn-primary" data-dismiss="modal"
+                        (click)="update(room._id, room.name);">Xác
+                        nhận</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <div class="modal fade" id="myModalthem" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header" style="text-align: center;">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Thêm phòng</h4>
+          </div>
+          <div class="modal-body">
+            <form class="panel">
+              <div class="row ">
+                <div class="col-md-4" style="margin-top: 30px">
+                  <p style="text-align: center">Tên phòng</p>
+                </div>
+                <div class=" col-md-8" style="width: 50px">
+                  <input name="name" type="text" [(ngModel)]=name required class="form-group"
+                    style="text-align: center; width: 250px; height: 30px; margin-top: 22px" />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer" style="text-align: center;">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="create(name);">Xác
+              nhận</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

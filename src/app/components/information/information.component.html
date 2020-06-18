@@ -1,0 +1,139 @@
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+  <div class="row">
+    <ol class="breadcrumb">
+      <li><a routerLink="/admin/home"> <em class="fa fa-home"></em>
+        </a></li>
+      <li class="active">Thông tin cá nhân</li>
+    </ol>
+  </div>
+  <div class="widget">
+    <form (ngSubmit)="onSubmitInfo();" [formGroup]="formInfo">
+      <div class="title">
+        <h4>Thông tin cá nhân</h4>
+      </div>
+      <div class="formRow form-group">
+        <label>Email</label>
+        <div class="formRight">
+          <div class="col-xs-6">
+            <input class="form-control" type="text" formControlName="email">
+          </div>
+        </div>
+      </div>
+      <div class="formRow form-group">
+        <label> Họ và tên </label>
+        <div class="formRight">
+          <div class="col-xs-6">
+            <input class="form-control" type="text" formControlName="name">
+          </div>
+        </div>
+      </div>
+      <div class="formRow form-group">
+        <label> Đơn vị </label>
+        <div class="formRight">
+          <div class="col-xs-6">
+            <input class="form-control" type="text" formControlName="unit">
+          </div>
+        </div>
+      </div>
+      <div class="formRow form-group">
+        <label>Giới tính</label>
+        <div class="form-group formRight">
+          <div class="col-xs-6">
+            <select class="form-control" formControlName="gender">
+              <option value="1">Nam
+              </option>
+              <option value="0">Nữ
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="formRow form-group">
+        <label>Số điện thoại</label>
+        <div class="formRight">
+          <div class="col-xs-6">
+            <input class="form-control" type="text" (keypress)="keyPress($event)" formControlName="numberphone"
+              name="numberphone"
+              [ngClass]="{'is-invalid': formInfo.get('numberphone').touched && formInfo.get('numberphone').invalid}">
+            <div *ngIf="formInfo.get('numberphone').touched && formInfo.get('numberphone').invalid"
+              class="invalid-feedback">
+              <div *ngIf="formInfo.get('numberphone').errors.required">Vui lòng nhập số điện thoại</div>
+              <div *ngIf="formInfo.get('numberphone').errors.format">Số điện thoại không hợp lệ</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="formRow form-group">
+        <label> Địa chỉ</label>
+        <div class="formRight">
+          <div class="col-xs-6">
+            <input class="form-control" type="text" formControlName="address"
+              [ngClass]="{'is-invalid': formInfo.get('address').touched && formInfo.get('address').invalid}">
+            <div *ngIf="formInfo.get('address').touched && formInfo.get('address').invalid" class="invalid-feedback">
+              <div *ngIf="formInfo.get('address').errors.required">Vui lòng nhập địa chỉ</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="formRow" style="height: 50px">
+        <div class="formRight">
+          <button type="submit" class="btn btn-primary">CHỈNH SỬA</button>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </form>
+    <form (ngSubmit)="onSubmitPassword();" [formGroup]="formPassword">
+      <div class="title">
+        <h4>Đổi mật khẩu</h4>
+      </div>
+      <div class="formRow form-group">
+        <label> Mật khẩu cũ</label>
+        <div class="formRight">
+          <div class="col-xs-6">
+            <input class="form-control" formControlName="oldpassword" type="password"
+              [ngClass]="{'is-invalid': formPassword.get('oldpassword').touched && formPassword.get('oldpassword').invalid}">
+            <div *ngIf="formPassword.get('oldpassword').touched && formPassword.get('oldpassword').invalid"
+              class="invalid-feedback">
+              <div *ngIf="formPassword.get('oldpassword').errors.required">Vui lòng nhập mật khẩu cũ</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="formRow form-group">
+        <label> Mật khẩu mới</label>
+        <div class="formRight">
+          <div class="col-xs-6">
+            <input class="form-control" id="" formControlName="password" type="password"
+              [ngClass]="{'is-invalid': formPassword.get('password').touched && formPassword.get('password').invalid}">
+            <div *ngIf="formPassword.get('password').touched && formPassword.get('password').invalid"
+              class="invalid-feedback">
+              <div *ngIf="formPassword.get('password').errors.required">Vui lòng nhập mật khẩu mới</div>
+              <div *ngIf="formPassword.get('password').errors.minlength">Mật khẩu quá ngắn</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="formRow form-group">
+        <label>Xác nhận Mật khẩu</label>
+        <div class="formRight">
+          <div class="col-xs-6">
+            <input class="form-control" formControlName="password2" type="password"
+              [ngClass]="{'is-invalid': formPassword.get('password2').touched && formPassword.get('password2').invalid}">
+            <div *ngIf="formPassword.get('password2').touched && formPassword.get('password2').invalid"
+              class="invalid-feedback">
+              <div *ngIf="formPassword.get('password2').errors.required">Vui lòng xác nhận lại mật khẩu</div>
+              <div *ngIf="formPassword.get('password2').errors.match">Xác nhận lại không chính xác</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="formRow" style="height: 50px">
+        <div class="formRight">
+          <button type="submit" class="btn btn-primary">ĐỔI MẬT KHẨU</button>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </form>
+  </div>
+</div>

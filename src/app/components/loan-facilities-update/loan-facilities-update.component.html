@@ -1,0 +1,131 @@
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+  <div class="row">
+    <ol class="breadcrumb">
+      <li><a routerLink="/admin/home"> <em class="fa fa-home"></em>
+        </a></li>
+      <li class="active"><a routerLink="/admin/ql-san-pham">Quản lý thiết bị
+        </a></li>
+      <li><em class="fa"> Sửa thiết bị cấp phát</em></li>
+    </ol>
+  </div>
+  <div class="widget">
+    <form (ngSubmit)="onSubmit();" [formGroup]="form" id="add-nv-form">
+      <div class="title">
+        <h4>Sửa dữ liệu</h4>
+      </div>
+      <div class="col-xs-8">
+        <div class="formRow">
+          <label>Tên thiết bị </label>
+          <div class="formRight form-group">
+            <div class="col-xs-10">
+              <input class="form-control" type="text" formControlName="name">
+            </div>
+          </div>
+        </div>
+        <div class="formRow">
+          <label>Đơn vị</label>
+          <div class="formRight form-group">
+            <div class="col-xs-10">
+              <select class="form-control" formControlName="unit" (ngModelChange)="changeUnit($event)"
+                [ngClass]="{'is-invalid': form.get('unit').touched && form.get('unit').invalid}">
+                <option *ngFor="let unit of arrUnits" value="{{ unit._id }}">{{ unit.name }}
+                </option>
+              </select>
+              <div *ngIf="form.get('unit').touched && form.get('unit').invalid" class="invalid-feedback">
+                <div>Vui lòng chọn đơn vị</div>
+              </div>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="formRow">
+          <label>Người quản lý</label>
+          <div class="formRight form-group">
+            <div class="col-xs-10">
+              <select class="form-control" formControlName="manager" (ngModelChange)="changeUser($event)"
+                [ngClass]="{'is-invalid': form.get('manager').touched && form.get('manager').invalid}">
+                <option *ngFor="let user of arrUsersFilters" value="{{ user.email }}">{{ user.name }}
+                </option>
+              </select>
+              <div *ngIf="form.get('manager').touched && form.get('manager').invalid" class="invalid-feedback">
+                <div>Vui lòng chọn người quản lý</div>
+              </div>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="formRow">
+          <label>Phòng</label>
+          <div class="formRight form-group">
+            <div class="col-xs-10">
+              <select class="form-control" formControlName="room"
+                [ngClass]="{'is-invalid': form.get('room').touched && form.get('room').invalid}">
+                <option *ngFor="let room of arrRooms" value="{{ room._id }}">{{ room.name }}
+                </option>
+              </select>
+              <div *ngIf="form.get('room').touched && form.get('room').invalid" class="invalid-feedback">
+                <div>Vui lòng chọn loại thiết bị</div>
+              </div>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="formRow">
+          <label>Ngày cấp phát</label>
+          <div class="formRight form-group">
+            <div class="col-xs-10">
+              <input class="form-control" type="date" formControlName='from'
+                [ngClass]="{'is-invalid': form.get('from').touched && form.get('from').invalid}">
+              <div *ngIf="form.get('from').touched && form.get('from').invalid" class="invalid-feedback">
+                <div>Vui lòng chọn ngày cấp phát</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="formRow">
+          <label>Ngày thu hồi</label>
+          <div class="formRight form-group">
+            <div class="col-xs-10">
+              <input class="form-control" type="date" formControlName='to'
+                [ngClass]="{'is-invalid': form.get('to').touched && form.get('to').invalid}">
+              <div *ngIf="form.get('to').touched && form.get('to').invalid" class="invalid-feedback">
+                <div>Vui lòng chọn ngày thu hồi</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="formRow">
+          <label>Ghi chú</label>
+          <div class="formRight form-group">
+            <div class="col-xs-10">
+              <input class="form-control" type="text" formControlName="note">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <div class="row">
+          <label class="label-qr">QR Code</label>
+          <div class="formRight">
+            <!-- <img [src]="imgQR"> -->
+            <ngx-qrcode [qrc-value]="id" qrc-class="QRCode" qrc-errorCorrectionLevel="L" qrc-version = "2">
+            </ngx-qrcode>
+          </div>
+          <br>
+        </div>
+        <div class="row">
+          <label class="label-img">Hình ảnh thiết bị</label>
+          <div class="formRight">
+            <img [src]="form.get('image').value">
+          </div>
+        </div>
+      </div>
+      <div class="formRow" style="height: 50px">
+        <div class="formRight">
+          <button type="submit" class="btn btn-primary">HOÀN TẤT</button>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </form>
+  </div>
+</div>

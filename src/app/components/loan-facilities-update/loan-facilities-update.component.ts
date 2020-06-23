@@ -53,7 +53,7 @@ export class LoanFacilitiesUpdateComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.paramMap.get('id').toString();
-    // this.right = JSON.parse(sessionStorage.getItem('user')).right || null;
+    // this.right = JSON.parse(localStorage.getItem('user')).right || null;
     this.right = Right.Admin;
     if (this.right == Right.Admin) {
       this.getLoanFacilities();

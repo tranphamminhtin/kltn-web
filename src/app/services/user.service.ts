@@ -10,7 +10,7 @@ export class UserService {
 
   headers = new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+    'Authorization': 'Bearer ' + localStorage.getItem('token')
   });
 
   url = 'http://localhost:3000/user';
@@ -20,7 +20,7 @@ export class UserService {
   }
 
   get(email) {
-    const url = this.url + '/' + email;
+    const url = this.url + '/users/' + email;
     return this.http.get(url, { headers: this.headers });
   }
 
@@ -30,13 +30,13 @@ export class UserService {
   }
 
   update(value) {
-    const url = this.url + '/' + value.email;
+    const url = this.url + '/users/' + value.email;
     const body = JSON.stringify(value);
     return this.http.put(url, body, { headers: this.headers });
   }
 
   remove(email) {
-    const url = this.url + '/' + email;
+    const url = this.url + '/users/' + email;
     return this.http.delete(url, { headers: this.headers });
   }
 

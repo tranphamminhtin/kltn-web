@@ -15,8 +15,8 @@ export class AppComponent implements AfterViewChecked {
   }
 
   getIsLogin(): Boolean {
-    if (sessionStorage.getItem('user') && sessionStorage.getItem('token'))
-      return true;
+    if (localStorage.getItem('isLogin'))
+      return JSON.parse(localStorage.getItem('isLogin'));
     return false;
   }
 }

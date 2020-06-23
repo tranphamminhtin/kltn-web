@@ -28,7 +28,6 @@
       <tr *ngFor="let facilities of arrFacilities">
         <td>{{ facilities.name }}</td>
         <td>{{ getNameType(facilities.type) }}</td>
-        <!-- <td>{{ facilities.type }}</td> -->
         <td>{{ facilities.supplier }}</td>
         <td>{{ facilities.date | date:"dd/MM/yyyy"}}</td>
         <td><img [src]="facilities.image"></td>
@@ -65,42 +64,6 @@
           </div>
         </td>
       </tr>
-      <!-- <tr *ngFor="let facilities of arrFacilities">
-        <td>{{ facilities._id }}</td>
-        <td>{{ facilities.date | date:"dd/MM/yyyy"}}</td>
-        <td>{{ facilities.username }}</td>
-        <td>{{ facilities.amount }}</td>
-        <td>{{ facilities.price + ' đ'}}</td>
-        <td>
-          <a routerLink='/admin/chi-tiet-don-hang-ad/{{facilities._id}}' *ngIf="stateShow === 'THIETBI'">
-            <button type="button" class="btn btn-info"><i class="fa fa-sign-in"></i> Cấp phát</button>
-          </a>&nbsp;
-          <a routerLink='/admin/chi-tiet-don-hang-ad/{{facilities._id}}'>
-            <button type="button" class="btn btn-info"><i class="fa fa-info-circle"></i> Xem</button>
-          </a>&nbsp;
-          <button *ngIf="stateShow !== 'CAPPHAT'" type="button" class="btn btn-info " data-toggle="modal"
-            [attr.data-target]="'#myModal'+ facilities._id"><i class="fa fa-times"></i>Xóa</button>
-          <div class="modal fade" id="myModal{{ facilities._id }}" role="dialog">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header" style="text-align: center;">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Bạn chắc chắn xóa</h4>
-                </div>
-                <div class="modal-body">
-                  <p>
-                    {{ facilities._id }}
-                  </p>
-                </div>
-                <div class="modal-footer" style="text-align: center;">
-                  <button type="button" class="btn btn-default" data-dismiss="modal" (click)="remove(facilities._id);">Xác
-                    nhận</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </td>
-      </tr> -->
     </tbody>
   </table>
 </div>

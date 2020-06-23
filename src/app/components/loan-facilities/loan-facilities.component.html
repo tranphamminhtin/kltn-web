@@ -7,13 +7,6 @@
     </ol>
     <br>
     <div *ngIf="right === arrRights[0]" class="filter">
-      <!-- <button type="button" class="btn btn-primary btn-md" style="margin: 15px;"><i class="fa fa-plus"></i>
-        Thêm thiết bị</button> -->
-      <!-- <select class="form-control" formControlName="unit" (ngModelChange)="changeUnit($event)"
-        [ngClass]="{'is-invalid': form.get('unit').touched && form.get('unit').invalid}">
-        <option *ngFor="let unit of arrUnits" value="{{ unit._id }}">{{ unit.name }}
-        </option>
-      </select> -->
       <div class="row">
         <div class="col-xs-4">
           <select [(ngModel)]="filterRoom" (ngModelChange)="changeRoom($event)">
@@ -56,102 +49,22 @@
     <a class="btn btn-info" [ngClass]="{'active': stateShow === arrStateShow[2]}" (click)="show(arrStateShow[2]);">
       Thiết bị thu hồi</a>
   </div>
-  <h3 style="text-align: center; color: black" *ngIf="right === arrRights[2]">Danh sách thiết bị</h3>
   <table class="table table-bordered">
     <thead>
       <tr>
         <th class="name">Tên thiết bị</th>
         <th class="room">Phòng</th>
         <th class="unit">Đơn vị</th>
-        <th class="user" *ngIf="right !==arrRights[1]">Người quản lý</th>
+        <th class="user" *ngIf="right ===arrRights[0]">Người quản lý</th>
         <th class="date">Ngày cấp phát</th>
         <th class="date">Ngày thu hồi</th>
-        <th *ngIf="right !==arrRights[0]">Ghi chú</th>
-        <th class="state" *ngIf="right !==arrRights[0]">Tình trạng</th>
+        <th *ngIf="right ===arrRights[1]">Ghi chú</th>
+        <th class="state" *ngIf="right ===arrRights[1]">Tình trạng</th>
         <th class="other">Thao tác</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let facilities of arrFilters">
-        <!-- <ng-container *ngIf="stateShow === 'THIETBI'">
-          <td>{{ getNameFacilities(facilities._id) }}</td>
-          <td>{{ facilities.type }}</td>
-          <td>{{ facilities.from }}</td>
-          <td>{{ facilities.date | date:"dd/MM/yyyy"}}</td>
-          <td><img src="{{ facilities.image }}"></td>
-          <td>{{ facilities.note }}</td>
-          <td>{{ facilities.quanlity }}</td>
-          <td *ngIf="right ==='ADMIN'">
-            <a routerLink='/admin/chi-tiet-don-hang-ad/{{facilities._id}}'>
-              <button type="button" class="btn btn-info"><i class="fa fa-sign-in"></i> Cấp phát</button>
-            </a><br>
-            <a routerLink='/admin/chi-tiet-don-hang-ad/{{facilities._id}}'>
-              <button type="button" class="btn btn-info"><i class="fa fa-info-circle"></i> Xem</button>
-            </a><br>
-            <button type="button" class="btn btn-info " data-toggle="modal"
-              [attr.data-target]="'#myModal'+ facilities._id"><i class="fa fa-times"></i> Xóa</button>
-            <div class="modal fade" id="myModal{{ facilities._id }}" role="dialog">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header" style="text-align: center;">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Bạn chắc chắn xóa</h4>
-                  </div>
-                  <div class="modal-body">
-                    <p>
-                      {{ facilities.name }}
-                    </p>
-                  </div>
-                  <div class="modal-footer" style="text-align: center;">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"
-                      (click)="remove(facilities._id);">Xác
-                      nhận</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </td>
-        </ng-container> -->
-
-        <!-- <ng-container *ngIf="stateShow !== 'THIETBI'">
-          <td>{{ getNameFacilities(facilities.facilities) }}</td>
-          <td>{{ getNameRoom(facilities.room) }}</td>
-          <td>{{ getNameUnit(facilities.unit) }}</td>
-          <td *ngIf="right !== 'MANAGER'">{{ facilities.manager }}</td>
-          <td>{{ facilities.from | date:"dd/MM/yyyy"}}</td>
-          <td>{{ facilities.to | date:"dd/MM/yyyy"}}</td>
-          <td *ngIf="right !== 'ADMIN'">{{ facilities.note }}</td>
-          <td *ngIf="right !== 'ADMIN'">{{ facilities.state }}</td>
-          <td>{{ facilities.quanlity }}</td>
-          <td *ngIf="right !== 'USER'">
-            <a routerLink='/admin/chi-tiet-don-hang-ad/{{facilities._id}}'>
-              <button type="button" class="btn btn-info"><i class="fa fa-info-circle"></i> Xem</button>
-            </a><br>
-            <button *ngIf="right === 'ADMIN'" type="button" class="btn btn-info " data-toggle="modal"
-              [attr.data-target]="'#myModal'+ facilities._id"><i class="fa fa-times"></i> Xóa</button>
-            <div class="modal fade" id="myModal{{ facilities._id }}" role="dialog">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header" style="text-align: center;">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Bạn chắc chắn xóa</h4>
-                  </div>
-                  <div class="modal-body">
-                    <p>
-                      {{ facilities.name }}
-                    </p>
-                  </div>
-                  <div class="modal-footer" style="text-align: center;">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"
-                      (click)="remove(facilities._id);">Xác
-                      nhận</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </td>
-        </ng-container> -->
-
         <ng-container *ngIf="right === arrRights[0]">
           <td>{{ getNameFacilities(facilities.facilities) }}</td>
           <td>{{ getNameRoom(facilities.room) }}</td>
@@ -240,7 +153,7 @@
           </td>
         </ng-container>
 
-        <ng-container *ngIf="right !== arrRights[0]">
+        <ng-container *ngIf="right === arrRights[1]">
           <td>{{ getNameFacilities(facilities.facilities) }}</td>
           <td>{{ getNameRoom(facilities.room) }}</td>
           <td>{{ getNameUnit(facilities.unit) }}</td>
@@ -324,42 +237,6 @@
           </td>
         </ng-container>
       </tr>
-      <!-- <tr *ngFor="let facilities of arrFacilities">
-        <td>{{ facilities._id }}</td>
-        <td>{{ facilities.date | date:"dd/MM/yyyy"}}</td>
-        <td>{{ facilities.username }}</td>
-        <td>{{ facilities.amount }}</td>
-        <td>{{ facilities.price + ' đ'}}</td>
-        <td>
-          <a routerLink='/admin/chi-tiet-don-hang-ad/{{facilities._id}}' *ngIf="stateShow === 'THIETBI'">
-            <button type="button" class="btn btn-info"><i class="fa fa-sign-in"></i> Cấp phát</button>
-          </a>&nbsp;
-          <a routerLink='/admin/chi-tiet-don-hang-ad/{{facilities._id}}'>
-            <button type="button" class="btn btn-info"><i class="fa fa-info-circle"></i> Xem</button>
-          </a>&nbsp;
-          <button *ngIf="stateShow !== 'CAPPHAT'" type="button" class="btn btn-info " data-toggle="modal"
-            [attr.data-target]="'#myModal'+ facilities._id"><i class="fa fa-times"></i>Xóa</button>
-          <div class="modal fade" id="myModal{{ facilities._id }}" role="dialog">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header" style="text-align: center;">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Bạn chắc chắn xóa</h4>
-                </div>
-                <div class="modal-body">
-                  <p>
-                    {{ facilities._id }}
-                  </p>
-                </div>
-                <div class="modal-footer" style="text-align: center;">
-                  <button type="button" class="btn btn-default" data-dismiss="modal" (click)="remove(facilities._id);">Xác
-                    nhận</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </td>
-      </tr> -->
     </tbody>
   </table>
 </div>

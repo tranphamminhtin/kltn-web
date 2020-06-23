@@ -16,10 +16,9 @@ import { LoanFacilitiesModule } from './components/loan-facilities/loan-faciliti
 import { LoanFacilitiesUpdateModule } from "./components/loan-facilities-update/loan-facilities-update.module";
 // import { LoginModule } from "./components/login/login.module";
 import { VoteModule } from './components/vote/vote.module';
-import { VoteCreateModule } from './components/vote-create/vote-create.module';
 
 const routesConfig: Routes = [
-  // { path: '', component: LoginComponent },
+  { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   // { path: '**', redirectTo: '/information', pathMatch: 'full' }
 ];
@@ -35,14 +34,12 @@ const routesConfig: Routes = [
     LoanFacilitiesModule,
     LoanFacilitiesCreateModule,
     LoanFacilitiesUpdateModule,
-    // LoginModule,
     RoomModule,
     UnitModule,
     UserModule,
     UserCreateModule,
     InformationModule,
     VoteModule,
-    VoteCreateModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routesConfig),

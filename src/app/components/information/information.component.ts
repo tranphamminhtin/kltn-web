@@ -24,7 +24,7 @@ export class InformationComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder, private userService: UserService, private unitService: UnitService,
     private notificationService: NotificationService) {
     this.formInfo = this.fb.group({
-      email: [{ value: 'tranphamminhtin@gmail.com', disabled: true }],
+      email: [{ value: 'asd@gmail.com', disabled: true }],
       name: [{ value: 'name', disabled: true }],
       gender: [{ value: 1, disabled: true }],
       unit: [{ value: 'unit', disabled: true }],
@@ -111,7 +111,7 @@ export class InformationComponent implements OnInit, OnDestroy {
   }
 
   getUser() {
-    const email = this.formInfo.get('email').value;
+    const email = localStorage.getItem('email');
     const sub = this.userService.get(email).subscribe(res => {
       if (!res['success']) {
         sub.unsubscribe();

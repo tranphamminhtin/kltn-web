@@ -19,12 +19,12 @@ export class AuthAdminManagerGuard implements CanActivate {
         this.http.get('http://localhost:3000/user/verifyToken/', {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
           }
         })
           .subscribe(res => {
             if (!res['success']) {
-              sessionStorage.clear();
+              localStorage.clear();
               this.router.navigate(['/login'], { queryParams: { return: state.url } });
               if (res['login'])
                 this.notificationService.showInfor('Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại');
@@ -32,7 +32,7 @@ export class AuthAdminManagerGuard implements CanActivate {
             } else
               resolve(true);
           }, err => {
-            sessionStorage.clear();
+            localStorage.clear();
             this.router.navigate(['/login'], { queryParams: { return: state.url } });
             resolve(false);
           });
@@ -44,12 +44,12 @@ export class AuthAdminManagerGuard implements CanActivate {
   }
 
   checkSession(): boolean {
-    if (sessionStorage.getItem('email') && sessionStorage.getItem('token') && sessionStorage.getItem('right')) {
-      const right = JSON.parse(sessionStorage.getItem('right'));
+    if (localStorage.getItem('email') && localStorage.getItem('token') && localStorage.getItem('right')) {
+      const right = JSON.parse(localStorage.getItem('right'));
       if (right === 0 || right === 1)
         return true;
       else {
-        sessionStorage.clear();
+        localStorage.clear();
         return false;
       }
     } else return false;

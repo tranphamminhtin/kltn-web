@@ -6,6 +6,7 @@ import { emailValidator } from 'src/app/validators/validator';
 import { Subscription } from 'rxjs';
 import { AuthService, GoogleLoginProvider } from "angularx-social-login";
 import { Router, ActivatedRoute } from '@angular/router';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    localStorage.clear();
     this.route.queryParams
       .subscribe(params => this.return = params['return'] || '/information');
   }
@@ -54,21 +56,31 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.notificationService.showError('Tên đăng nhập hoặc mật khẩu sai');
         this.form.get('password').reset();
       } else {
-        this.notificationService.showSuccess('Đăng nhập thành công');
-        this.setSession(res);
+        if (res['right'] === 2) {
+          sub.unsubscribe();
+          console.log(res['message']);
+          this.notificationService.showError('Tên đăng nhập hoặc mật khẩu sai');
+          this.form.get('password').reset();
+        } else {
+          this.notificationService.showSuccess('Đăng nhập thành công');
+          this.setSession(res);
+        }
       }
     }, err => {
       console.log(err);
       this.notificationService.showError(err);
     }, () => {
       this.subscriptions.push(sub);
+      this.route.queryParams
+            .subscribe(params => this.return = params['return'] || '/information');
+          this.router.navigate([this.return]);
       this.router.navigate([this.return]);
     });
   }
 
   loginWithGG() {
     let socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
-    if (sessionStorage.getItem('sociallogin'))
+    if (localStorage.getItem('sociallogin'))
       this.authService.signOut();
     this.authService.signIn(socialPlatformProvider).then(socialUser => {
       const sub = this.userService.loginWithGG(socialUser)
@@ -78,21 +90,32 @@ export class LoginComponent implements OnInit, OnDestroy {
             console.log(res['message']);
             this.notificationService.showError(res['message']);
           } else {
-            this.setSession(res);
+            if (res['right'] === 2) {
+              sub.unsubscribe();
+              console.log(res['message']);
+              this.notificationService.showError('Tên đăng nhập hoặc mật khẩu sai');
+            } else {
+              this.notificationService.showSuccess('Đăng nhập thành công');
+              this.setSession(res);
+            }
           }
         }, err => {
           console.log(err);
           this.notificationService.showError(err);
         }, () => {
           this.subscriptions.push(sub);
+          this.route.queryParams
+            .subscribe(params => this.return = params['return'] || '/information');
+          this.router.navigate([this.return]);
+      this.router.navigate([this.return]);
         });
     });
   }
 
   setSession(res) {
-    sessionStorage.setItem('email', res['email']);
-    sessionStorage.setItem('right', res['right']);
-    sessionStorage.setItem('token', res['token']);
-    sessionStorage.setItem('isLogin', JSON.stringify(true));
+    localStorage.setItem('email', res['email']);
+    localStorage.setItem('right', res['right']);
+    localStorage.setItem('token', res['token']);
+    localStorage.setItem('isLogin', JSON.stringify(true));
   }
 }

@@ -28,24 +28,24 @@
   </div>
   <div class="divider"></div>
   <ul class="nav menu">
-    <li><a routerLink="/admin/home"><em>&nbsp;</em>Thông tin cá nhân</a></li>
-    <li><a routerLink="/admin/home"><em>&nbsp;</em>Quản lý tài khoản</a></li>
+    <li><a routerLink="/information"><em>&nbsp;</em>Thông tin cá nhân</a></li>
+    <li><a routerLink="/tai-khoan"><em>&nbsp;</em>Quản lý tài khoản</a></li>
     <ng-container *ngIf="getAdmin()">
       <li class="parent "><a data-toggle="collapse" href="#sub-item-1">
           <em class="fa fa-navicon">&nbsp;</em>Quản lý thiết bị<span data-toggle="collapse" class="icon pull-right"><em
               class="fa fa-plus"></em></span>
         </a>
         <ul class="children collapse" id="sub-item-1">
-          <li><a class="" routerLink="/admin/ql-quyen">
+          <li><a class="" routerLink="/loai-thiet-bi">
               <span class="fa fa-arrow-right">&nbsp;</span>Loại thiết bị
             </a></li>
-          <li><a routerLink="/admin/ql-nhan-vien">
+          <li><a routerLink="/thiet-bi">
               <span class="fa fa-arrow-right">&nbsp;</span>Thiết bị
             </a></li>
-          <li><a routerLink="/admin/ql-nhan-vien">
+          <li><a routerLink="/thiet-bi-cap-phat">
               <span class="fa fa-arrow-right">&nbsp;</span>Thiết bị cấp phát
             </a></li>
-          <li><a routerLink="/admin/ql-nhan-vien">
+          <li><a routerLink="/thiet-bi-cap-phat">
               <span class="fa fa-arrow-right">&nbsp;</span>Thiết bị quản lý
             </a></li>
         </ul>
@@ -55,17 +55,17 @@
             class="icon pull-right"><em class="fa fa-plus"></em></span>
         </a>
         <ul class="children collapse" id="sub-item-2">
-          <li><a class="" routerLink="/admin/ql-quyen">
+          <li><a class="" routerLink="/phong">
               <span class="fa fa-arrow-right">&nbsp;</span>Quản lý phòng
             </a></li>
-          <li><a routerLink="/admin/ql-nhan-vien">
+          <li><a routerLink="/don-vi">
               <span class="fa fa-arrow-right">&nbsp;</span>Quản lý đơn vị
             </a></li>
         </ul>
       </li>
     </ng-container>
 
-    <li><a routerLink="/admin/ql-khach-hang"><em>&nbsp;</em>Thiết bị</a></li>
+    <li><a routerLink="/thiet-bi-cap-phat"><em>&nbsp;</em>Thiết bị</a></li>
 
     <li><a (click)="logOut();"><em>&nbsp;</em> Đăng xuất</a></li>
   </ul>

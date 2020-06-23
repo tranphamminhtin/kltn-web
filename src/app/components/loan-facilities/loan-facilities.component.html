@@ -1,9 +1,9 @@
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
   <div class="row">
     <ol class="breadcrumb">
-      <li><a routerLink="/admin/home"> <em class="fa fa-home"></em>
+      <li><a routerLink="/information"> <em class="fa fa-home"></em>
         </a></li>
-      <li class="active"><a routerLink="/admin/ql-don-hang">Quản lý thiết bị</a></li>
+      <li class="active"><a routerLink="/thiet-bi-cap-phat">Quản lý thiết bị</a></li>
     </ol>
     <br>
     <div *ngIf="right === arrRights[0]" class="filter">
@@ -171,10 +171,10 @@
             <ng-container *ngIf="stateShow === arrStateShow[1]">
               <button type="button" class="btn btn-info" (click)="revoke(facilities._id)"><i class="fa fa-sign-in"></i>
                 Thu hồi</button><br>
-              <a routerLink='/admin/chi-tiet-don-hang-ad/{{facilities._id}}'>
+              <a routerLink='/danh-gia/{{facilities._id}}'>
                 <button type="button" class="btn btn-info"><i class="fa fa-sign-in"></i> Đánh giá</button>
               </a><br>
-              <a routerLink='/admin/chi-tiet-don-hang-ad/{{facilities._id}}'>
+              <a routerLink='/sua-cap-phat/{{facilities._id}}'>
                 <button type="button" class="btn btn-info"><i class="fa fa-info-circle"></i> Xem</button>
               </a><br>
             </ng-container>
@@ -182,7 +182,7 @@
             <ng-container *ngIf="stateShow === arrStateShow[2]">
               <button type="button" class="btn btn-info" data-toggle="modal"
                 [attr.data-target]="'#myModalLoan'+ facilities._id"><i class="fa fa-sign-in"></i>Cấp phát</button><br>
-              <a routerLink='/admin/chi-tiet-don-hang-ad/{{facilities._id}}'>
+              <a routerLink='/sua-cap-phat/{{facilities._id}}'>
                 <button type="button" class="btn btn-info"><i class="fa fa-info-circle"></i> Xem</button>
               </a><br>
               <button type="button" class="btn btn-info " data-toggle="modal"
@@ -255,10 +255,10 @@
             </ng-container>
 
             <ng-container *ngIf="stateShow === arrStateShow[1]">
-              <a routerLink='/admin/chi-tiet-don-hang-ad/{{facilities._id}}'>
+              <a routerLink='/admin/danh-gia/{{facilities._id}}'>
                 <button type="button" class="btn btn-info"><i class="fa fa-sign-in"></i> Đánh giá</button>
               </a><br>
-              <a routerLink='/admin/chi-tiet-don-hang-ad/{{facilities._id}}'>
+              <a routerLink='/sua-cap-phat/{{facilities._id}}'>
                 <button type="button" class="btn btn-info"><i class="fa fa-info-circle"></i> Xem</button>
               </a><br>
             </ng-container>
@@ -266,7 +266,7 @@
             <ng-container *ngIf="stateShow === arrStateShow[2]">
               <button type="button" class="btn btn-info" data-toggle="modal"
                 [attr.data-target]="'#myModalLoan'+ facilities._id"><i class="fa fa-sign-in"></i>Cấp phát</button><br>
-              <a routerLink='/admin/chi-tiet-don-hang-ad/{{facilities._id}}'>
+              <a routerLink='/sua-cap-phat/{{facilities._id}}'>
                 <button type="button" class="btn btn-info"><i class="fa fa-info-circle"></i> Xem</button>
               </a><br>
               <button type="button" class="btn btn-info " data-toggle="modal"

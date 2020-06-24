@@ -287,8 +287,8 @@ export class LoanFacilitiesComponent implements OnInit, OnDestroy {
       this.notificationService.showError(err);
     }, () => {
       this.subscriptions.push(sub);
-      const index = this.arrLoanFacilities.findIndex(fa => fa._id === _id);
-      this.arrLoanFacilities.splice(index, 1);
+      const index = this.arrFilters.findIndex(fa => fa._id === _id);
+      this.arrFilters.splice(index, 1);
       this.notificationService.showSuccess('Xóa thành công');
     });
   }

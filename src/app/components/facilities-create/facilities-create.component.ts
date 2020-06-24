@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { formatDate, Location } from "@angular/common";
 import { ActivatedRoute } from '@angular/router';
@@ -151,6 +151,7 @@ export class FacilitiesCreateComponent implements OnInit, OnDestroy {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.image = file;
+	this.form.get('image').setValue(file);
 
       const reader = new FileReader();
       reader.onload = (e: any) => {
@@ -164,6 +165,7 @@ export class FacilitiesCreateComponent implements OnInit, OnDestroy {
     const formData = new FormData();
     formData.append('image', this.image);
     for (var key in this.form.controls) {
+	if(key !=='image')
       formData.append(key, this.form.get(key).value);
       console.log(key);
     }

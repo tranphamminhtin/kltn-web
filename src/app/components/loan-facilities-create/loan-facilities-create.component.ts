@@ -43,23 +43,23 @@ export class LoanFacilitiesCreateComponent implements OnInit, OnDestroy {
       to: [formatDate(new Date(Date.now()), 'yyyy-MM-dd', 'en'), [Validators.required]],
       image: [{ value: '', disabled: true }],
       note: [''],
-      request: [false]
+      request: [false],
+      quantity: [1, [Validators.required, Validators.min(1)]]
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id').toString();
-    // this.right = JSON.parse(localStorage.getItem('user')).right || Right.Admin;
-    this.right = Right.Admin;
-    if (this.right == Right.Admin) {
-      this.getFacilities();
-      this.fetchUser();
-      this.fetchUnit();
-    } else {
-      this.form.get('request').setValue(true);
-      // this.getUser();
-    }
+    this.getFacilities();
+    this.fetchUser();
+    this.fetchUnit();
     this.fetchRoom();
+    this.right = JSON.parse(localStorage.getItem('right')) || Right.Admin;
+    if (this.right == Right.Manager) {
+      const email = localStorage.getItem('email');
+      this.form.get('request').setValue(true);
+      this.getUser(email);
+    }
   }
 
   ngOnDestroy() {
@@ -68,7 +68,10 @@ export class LoanFacilitiesCreateComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.form.valid) {
-      this.create();
+      const interation = 0 + this.form.get('quantity').value;
+      for (let i = 0; i < interation; i++) {
+        this.create();
+      }
     }
     else {
       this.form.markAllAsTouched();
@@ -76,7 +79,7 @@ export class LoanFacilitiesCreateComponent implements OnInit, OnDestroy {
   }
 
   create() {
-    const sub = this.loanService.create(this.form.value).subscribe(res => {
+    const sub = this.loanService.create(this.form.getRawValue()).subscribe(res => {
       if (!res['success']) {
         sub.unsubscribe();
         console.log(res['message']);
@@ -193,26 +196,10 @@ export class LoanFacilitiesCreateComponent implements OnInit, OnDestroy {
         this.notificationService.showError(res['message']);
         // this.router.navigate(['/login']);
       } else {
-        this.form.get('manager').setValue(res['message'].name);
-        this.getUnit(res['message'].unit);
-      }
-    }, err => {
-      console.log(err);
-      this.notificationService.showError(err);
-    }, () => {
-      this.subscriptions.push(sub);
-    });
-  }
-
-  getUnit(_id) {
-    const sub = this.unitService.get(_id).subscribe(res => {
-      if (!res['success']) {
-        sub.unsubscribe();
-        console.log(res['message']);
-        this.notificationService.showError(res['message']);
-        // this.router.navigate(['/login']);
-      } else {
-        this.form.get('unit').setValue(res['message'].name);
+        this.form.get('manager').setValue(res['message'].email);
+        this.form.get('manager').disable();
+        this.form.get('unit').setValue(res['message'].unit);
+        this.form.get('unit').disable();
       }
     }, err => {
       console.log(err);

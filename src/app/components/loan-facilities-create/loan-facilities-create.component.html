@@ -70,18 +70,6 @@
           </div>
           <div class="clear"></div>
         </div>
-        <!-- <div class="formRow">
-          <label>Ngày cấp phát</label>
-          <div class="formRight form-group">
-            <div class="col-xs-10">
-              <input class="form-control" type="date" formControlName='from'
-                [ngClass]="{'is-invalid': form.get('from').touched && form.get('from').invalid}">
-              <div *ngIf="form.get('from').touched && form.get('from').invalid" class="invalid-feedback">
-                <div>Vui lòng chọn ngày cấp phát</div>
-              </div>
-            </div>
-          </div>
-        </div> -->
         <div class="formRow">
           <label>Ngày thu hồi</label>
           <div class="formRight form-group">
@@ -99,6 +87,14 @@
           <div class="formRight form-group">
             <div class="col-xs-10">
               <input class="form-control" type="text" formControlName="note">
+            </div>
+          </div>
+        </div>
+        <div class="formRow">
+          <label>Số lượng</label>
+          <div class="formRight form-group">
+            <div class="col-xs-10">
+              <input class="form-control" type="number" formControlName="quantity">
             </div>
           </div>
         </div>

@@ -6,25 +6,25 @@
       <li class="active"><a routerLink="/thiet-bi-cap-phat">Quản lý thiết bị</a></li>
     </ol>
     <br>
-    <div *ngIf="right === arrRights[0]" class="filter">
+    <div class="filter">
       <div class="row">
         <div class="col-xs-4">
           <select [(ngModel)]="filterRoom" (ngModelChange)="changeRoom($event)">
-            <option value="" disabled selected>Phòng</option>
+            <option value="" selected>Phòng</option>
             <option *ngFor="let room of arrRooms" value="{{ room._id }}">{{ room.name }}
             </option>
           </select>
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-4" *ngIf="right === arrRights[0]">
           <select [(ngModel)]="filterUnit" (ngModelChange)="changeUnit($event)">
-            <option value="" disabled selected>Đơn vị</option>
+            <option value="" selected>Đơn vị</option>
             <option *ngFor="let unit of arrUnits" value="{{ unit._id }}">{{ unit.name }}
             </option>
           </select>
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-4" *ngIf="right === arrRights[0]">
           <select [(ngModel)]="filterUser" (ngModelChange)="changeUser($event)">
-            <option value="" disabled selected>Người quản lý</option>
+            <option value="" selected>Người quản lý</option>
             <option *ngFor="let user of arrUsersFilter" value="{{ user.email }}">{{ user.name }}
             </option>
           </select>

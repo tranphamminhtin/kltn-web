@@ -20,10 +20,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let type of arrTypes">
+      <tr *ngFor="let type of arrTypes; index as i">
         <td>
           <h3>
-            {{ type._id }}
+            {{ i+1 }}
           </h3>
         </td>
         <td>
@@ -56,7 +56,6 @@
               </div>
             </div>
           </div>
-          <br>
           <div class="row">
             <button type="button" class="btn btn-info " data-toggle="modal"
               [attr.data-target]="'#myModalSua'+type._id"><i class="fa fa-edit"></i>

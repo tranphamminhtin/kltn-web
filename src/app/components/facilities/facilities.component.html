@@ -9,6 +9,20 @@
       <button type="button" class="btn btn-primary btn-md" style="margin: 15px;"><i class="fa fa-plus"></i>
         Thêm thiết bị</button>
     </a>
+    <br>
+    <div class="filter">
+      <div class="row">
+        <div class="col-xs-5"></div>
+        <div class="col-xs-7">
+          <select [(ngModel)]="filterType" (ngModelChange)="changeType($event)">
+            <option value="" selected>Loại thiết bị</option>
+            <option *ngFor="let type of arrTypes" value="{{ type._id }}">{{ type.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <br>
   </div>
   <h3 style="text-align: center; color: black">Danh sách thiết bị</h3>
   <table class="table table-bordered">
@@ -25,7 +39,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let facilities of arrFacilities">
+      <tr *ngFor="let facilities of arrFilters">
         <td>{{ facilities.name }}</td>
         <td>{{ getNameType(facilities.type) }}</td>
         <td>{{ facilities.supplier }}</td>

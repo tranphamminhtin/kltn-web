@@ -15,8 +15,10 @@ export class FacilitiesComponent implements OnInit, OnDestroy {
 
 
   arrFacilities: Facilities[] = [];
+  arrFilters: Facilities[] = [];
   arrTypes: FacilitiesType[] = [];
   arrRights = ['ADMIN', 'MANAGER'];
+  filterType = "";
   // right = this.arrRights[0];
   right = this.arrRights[JSON.parse(localStorage.getItem('right'))];
   subscriptions: Subscription[] = [];
@@ -61,13 +63,15 @@ export class FacilitiesComponent implements OnInit, OnDestroy {
         // this.router.navigate(['/login']);
       } else {
         this.arrFacilities = res['message'];
-        this.arrFacilities.sort(this.sortByName);
+        this.arrFilters = res['message'];
+        this.arrFilters.sort(this.sortByName);
       }
     }, err => {
       console.log(err);
       this.notificationService.showError(err);
     }, () => {
       this.subscriptions.push(sub);
+      this.arrFilters.sort(this.sortByName);
     });
   }
 
@@ -97,9 +101,21 @@ export class FacilitiesComponent implements OnInit, OnDestroy {
     });
   }
 
+  changeType(idType) {
+    this.filterType = idType;
+    const arr = [...this.arrFacilities.map(fa => ({ ...fa }))];
+    if (idType !== null) {
+      this.arrFilters = arr.filter(fa => fa.type === idType);
+    } else {
+      this.arrFilters = arr.filter(fa => 1 === 1);
+    }
+    this.arrFilters.sort(this.sortByName);
+  }
+
   sortByName(a, b) {
     var nameA = a.name.toUpperCase(); // bỏ qua hoa thường
     var nameB = b.name.toUpperCase();
+    console.log(nameB, nameA);
     if (nameA < nameB) {
       return -1;
     }

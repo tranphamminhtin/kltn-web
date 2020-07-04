@@ -2,9 +2,17 @@
 td {
   text-align: center;
 }
+.filter {
+  width: 97%;
+  margin: auto;
+}
+.filter select {
+  font-size: 17px;
+  text-align: center;
+}
 img {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
 }
 .btn {
   margin-top: 3px;
@@ -14,4 +22,10 @@ th.other{
 }
 th.date{
   width: 115px;
+}
+th.note{
+  width: 190px;
+}
+th.type{
+  width: 150px;
 }

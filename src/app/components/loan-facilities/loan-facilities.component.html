@@ -29,6 +29,13 @@
             </option>
           </select>
         </div>
+        <div class="col-xs-4">
+          <select [(ngModel)]="filterFacilities" (ngModelChange)="changeFacilities($event)">
+            <option value="" selected>Thiết bị</option>
+            <option *ngFor="let facilities of arrFacilities" value="{{ facilities._id }}">{{ facilities.name }}
+            </option>
+          </select>
+        </div>
       </div>
     </div>
     <br>

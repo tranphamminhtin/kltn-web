@@ -40,6 +40,7 @@ export class LoanFacilitiesComponent implements OnInit, OnDestroy {
   filterRoom = "";
   filterUnit = "";
   filterUser = "";
+  filterFacilities = "";
   subscriptions: Subscription[] = [];
 
   constructor(private loanFacilitiesService: LoanFacilitiesService, private facilitiesService: FacilitiesService,
@@ -254,6 +255,9 @@ export class LoanFacilitiesComponent implements OnInit, OnDestroy {
       this.arrFilters = this.arrFilters.filter(f => f.unit === this.filterUnit);
     if (this.filterUser !== "")
       this.arrFilters = this.arrFilters.filter(f => f.manager === this.filterUser);
+    if (this.filterFacilities !== "")
+      this.arrFilters = this.arrFilters.filter(f => f.facilities === this.filterFacilities);
+    this.arrFilters.sort(this.sortById);
   }
 
   update(_id, value, state) {
@@ -300,9 +304,11 @@ export class LoanFacilitiesComponent implements OnInit, OnDestroy {
 
   changeUnit(idUnit) {
     this.filterUnit = idUnit;
-    const arr = [...this.arrUsers.map(user => ({ ...user }))];
-    this.arrUsersFilter = arr.filter(user => user.right === 1 && user.unit == idUnit);
-    this.filterUser = "";
+    if (idUnit !== "") {
+      const arr = [...this.arrUsers.map(user => ({ ...user }))];
+      this.arrUsersFilter = arr.filter(user => user.right === 1 && user.unit == idUnit);
+      this.filterUser = "";
+    }
     this.filter();
   }
 
@@ -310,5 +316,22 @@ export class LoanFacilitiesComponent implements OnInit, OnDestroy {
     this.filterUser = email;
     if (email !== "")
       this.filter();
+  }
+
+  changeFacilities(idFacilities) {
+    this.filterFacilities = idFacilities;
+    this.filter();
+  }
+
+  sortById(a, b) {
+    var idA = a._id; // bỏ qua hoa thường
+    var idB = b._id;
+    if (idA < idB) {
+      return -1;
+    }
+    if (idA > idB) {
+      return 1;
+    }
+    return 0;
   }
 }

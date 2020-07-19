@@ -7,8 +7,7 @@ import { LoanFacilitiesUpdateComponent } from './loan-facilities-update.componen
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 
 const routesConfig: Routes = [
-    // { path: 'them-cap-phat/:id', component: LoanFacilitiesCreateComponent, canActivate: [AuthGuard]}
-    { path: 'sua-cap-phat/:id', component: LoanFacilitiesUpdateComponent},
+    { path: 'sua-cap-phat/:id', component: LoanFacilitiesUpdateComponent, canActivate: [AuthGuard]},
 ]
 
 @NgModule({

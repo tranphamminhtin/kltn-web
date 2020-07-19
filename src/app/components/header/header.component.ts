@@ -22,14 +22,12 @@ export class HeaderComponent implements OnInit {
   }
 
   getAdmin() {
-    return true;
+    const right = JSON.parse(localStorage.getItem('right'));
+    return right === 0;
   }
 
   getManager() {
-    return true;
-  }
-
-  getUser() {
-    return true;
+    const right = JSON.parse(localStorage.getItem('right'));
+    return right === 1;
   }
 }

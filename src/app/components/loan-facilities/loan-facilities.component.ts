@@ -1,7 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { formatDate, Location } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { FacilitiesService } from 'src/app/services/facilities.service';
 import { RoomService } from 'src/app/services/room.service';
@@ -333,5 +330,9 @@ export class LoanFacilitiesComponent implements OnInit, OnDestroy {
       return 1;
     }
     return 0;
+  }
+
+  print() {
+    window.print();
   }
 }

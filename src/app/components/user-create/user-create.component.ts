@@ -5,7 +5,6 @@ import { Unit } from 'src/app/models/unit.model';
 import { Subscription } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification.service';
 import { UnitService } from 'src/app/services/unit.service';
-import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({

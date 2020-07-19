@@ -6,7 +6,6 @@ import { emailValidator } from 'src/app/validators/validator';
 import { Subscription } from 'rxjs';
 import { AuthService, GoogleLoginProvider } from "angularx-social-login";
 import { Router, ActivatedRoute } from '@angular/router';
-import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-login',

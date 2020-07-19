@@ -15,7 +15,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoanFacilitiesModule } from './components/loan-facilities/loan-facilities.module';
 import { LoanFacilitiesUpdateModule } from "./components/loan-facilities-update/loan-facilities-update.module";
 // import { LoginModule } from "./components/login/login.module";
-import { VoteModule } from './components/vote/vote.module';
 
 const routesConfig: Routes = [
   { path: '', component: LoginComponent },
@@ -39,7 +38,6 @@ const routesConfig: Routes = [
     UserModule,
     UserCreateModule,
     InformationModule,
-    VoteModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routesConfig),

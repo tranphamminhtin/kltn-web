@@ -6,8 +6,7 @@ import { InformationComponent } from './information.component';
 import { AuthGuard } from '../../guards/auth.guard';
 
 const routesConfig: Routes = [
-    // { path: 'information', component: InformationComponent, canActivate: [AuthGuard]}
-    { path: 'information', component: InformationComponent}
+    { path: 'information', component: InformationComponent, canActivate: [AuthGuard]}
 ]
 
 @NgModule({

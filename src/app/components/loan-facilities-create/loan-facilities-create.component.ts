@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { formatDate, Location } from '@angular/common';
+import { formatDate } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { FacilitiesService } from 'src/app/services/facilities.service';
 import { LoanFacilitiesService } from 'src/app/services/loan-facilities.service';

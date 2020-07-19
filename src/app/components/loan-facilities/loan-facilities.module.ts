@@ -6,8 +6,7 @@ import { AuthGuard } from '../../guards/auth.guard';
 import { LoanFacilitiesComponent } from './loan-facilities.component';
 
 const routesConfig: Routes = [
-    // { path: 'them-cap-phat/:id', component: LoanFacilitiesCreateComponent, canActivate: [AuthGuard]}
-    { path: 'thiet-bi-cap-phat', component: LoanFacilitiesComponent}
+    { path: 'thiet-bi-cap-phat', component: LoanFacilitiesComponent, canActivate: [AuthGuard]}
 ]
 
 @NgModule({

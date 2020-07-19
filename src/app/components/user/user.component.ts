@@ -13,7 +13,6 @@ import { Unit } from 'src/app/models/unit.model';
 })
 export class UserComponent implements OnInit, OnDestroy {
 
-  // arrUsers: Manager[];
   arrUsers: User[] = [];
   arrFilters: User[] = [];
   arrUnits: Unit[] = [];
@@ -27,10 +26,6 @@ export class UserComponent implements OnInit, OnDestroy {
     this.stateShow = 0;
     this.fetchUser();
     this.fetchUnit();
-    // this.arrUsers = [
-    //   { _id: '1', name: 'asd', username: 'username', unit: 'unit', gender: 0, address: 'add', numberphone: '123', email: 'emia' }
-    // ];
-    // this.user = { _id: '123', right: 23232, username: 'asd' };
   }
 
   ngOnDestroy() {

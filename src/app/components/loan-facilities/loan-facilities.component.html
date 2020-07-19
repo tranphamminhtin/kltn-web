@@ -1,5 +1,5 @@
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-  <div class="row">
+  <div class="row not-print">
     <ol class="breadcrumb">
       <li><a routerLink="/information"> <em class="fa fa-home"></em>
         </a></li>
@@ -38,9 +38,11 @@
         </div>
       </div>
     </div>
+    <button type="button" class="btn btn-success btn-md" style="margin: 15px;" (click)="print();"><i class="fa fa-print"></i>
+      &nbsp;In danh sách</button>
     <br>
   </div>
-  <div class="btn-group btn-group-justified" *ngIf="right === arrRights[0]">
+  <div class="btn-group btn-group-justified not-print" *ngIf="right === arrRights[0]">
     <a class="btn btn-info" [ngClass]="{'active': stateShow === arrStateShow[0]}" (click)="show(arrStateShow[0]);">
       Yêu cầu cấp phát</a>
     <a class="btn btn-info" [ngClass]="{'active': stateShow === arrStateShow[1]}" (click)="show(arrStateShow[1]);">
@@ -48,7 +50,7 @@
     <a class="btn btn-info" [ngClass]="{'active': stateShow === arrStateShow[2]}" (click)="show(arrStateShow[2]);">
       Thiết bị thu hồi</a>
   </div>
-  <div class="btn-group btn-group-justified" *ngIf="right === arrRights[1]">
+  <div class="btn-group btn-group-justified not-print" *ngIf="right === arrRights[1]">
     <a class="btn btn-info" [ngClass]="{'active': stateShow === arrStateShow[0]}" (click)="show(arrStateShow[0]);">
       Yêu cầu cấp phát</a>
     <a class="btn btn-info" [ngClass]="{'active': stateShow === arrStateShow[1]}" (click)="show(arrStateShow[1]);">
@@ -56,7 +58,7 @@
     <a class="btn btn-info" [ngClass]="{'active': stateShow === arrStateShow[2]}" (click)="show(arrStateShow[2]);">
       Thiết bị thu hồi</a>
   </div>
-  <table class="table table-bordered">
+  <table class="table table-bordered" id="tableData">
     <thead>
       <tr>
         <th class="name">Tên thiết bị</th>
@@ -66,7 +68,7 @@
         <th class="date">Ngày cấp phát</th>
         <th class="date">Ngày thu hồi</th>
         <th *ngIf="right ===arrRights[1]">Ghi chú</th>
-        <th class="state" *ngIf="right ===arrRights[1]">Tình trạng</th>
+        <th class="state">Tình trạng</th>
         <th class="other">Thao tác</th>
       </tr>
     </thead>
@@ -79,7 +81,8 @@
           <td>{{ getNameUser(facilities.manager) }}</td>
           <td>{{ facilities.from | date:"dd/MM/yyyy"}}</td>
           <td>{{ facilities.to | date:"dd/MM/yyyy"}}</td>
-          <td>
+          <td>{{ getVote(facilities._id) + ' %'}}</td>
+          <td class="other">
             <ng-container *ngIf="stateShow === arrStateShow[0]">
               <button type="button" class="btn btn-info" (click)="loan(facilities._id)"><i class="fa fa-sign-in"></i>
                 Cấp phát</button>
@@ -91,9 +94,6 @@
             <ng-container *ngIf="stateShow === arrStateShow[1]">
               <button type="button" class="btn btn-info" (click)="revoke(facilities._id)"><i class="fa fa-sign-in"></i>
                 Thu hồi</button><br>
-              <a routerLink='/danh-gia/{{facilities._id}}'>
-                <button type="button" class="btn btn-info"><i class="fa fa-sign-in"></i> Đánh giá</button>
-              </a><br>
               <a routerLink='/sua-cap-phat/{{facilities._id}}'>
                 <button type="button" class="btn btn-info"><i class="fa fa-info-circle"></i> Xem</button>
               </a><br>
@@ -168,16 +168,13 @@
           <td>{{ facilities.to | date:"dd/MM/yyyy"}}</td>
           <td>{{ facilities.note }}</td>
           <td>{{ getVote(facilities._id) + ' %'}}</td>
-          <td>
+          <td class="other">
             <ng-container *ngIf="stateShow === arrStateShow[0]">
               <button type="button" class="btn btn-info " data-toggle="modal"
                 [attr.data-target]="'#myModal'+ facilities._id"><i class="fa fa-times"></i> Xóa</button>
             </ng-container>
 
             <ng-container *ngIf="stateShow === arrStateShow[1]">
-              <a routerLink='/admin/danh-gia/{{facilities._id}}'>
-                <button type="button" class="btn btn-info"><i class="fa fa-sign-in"></i> Đánh giá</button>
-              </a><br>
               <a routerLink='/sua-cap-phat/{{facilities._id}}'>
                 <button type="button" class="btn btn-info"><i class="fa fa-info-circle"></i> Xem</button>
               </a><br>

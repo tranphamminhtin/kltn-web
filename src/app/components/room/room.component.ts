@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RoomService } from 'src/app/services/room.service';
 import { NotificationService } from 'src/app/services/notification.service';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Room } from 'src/app/models/room.model';
 

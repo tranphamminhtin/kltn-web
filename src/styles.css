@@ -3171,3 +3171,12 @@ width: 100%;}
   width: 250px;
   border: 1px solid black;
 }
+@media print {
+
+  .not-print, .other {
+    display: none;
+  }
+  #tableData{
+    display: block;
+  }
+}

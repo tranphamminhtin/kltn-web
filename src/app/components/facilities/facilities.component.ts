@@ -115,7 +115,6 @@ export class FacilitiesComponent implements OnInit, OnDestroy {
   sortByName(a, b) {
     var nameA = a.name.toUpperCase(); // bỏ qua hoa thường
     var nameB = b.name.toUpperCase();
-    console.log(nameB, nameA);
     if (nameA < nameB) {
       return -1;
     }

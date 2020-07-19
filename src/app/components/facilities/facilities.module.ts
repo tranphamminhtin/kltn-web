@@ -6,8 +6,7 @@ import { AuthGuard } from '../../guards/auth.guard';
 import { FacilitiesComponent } from './facilities.component';
 
 const routesConfig: Routes = [
-    // { path: 'thiet-bi', component: FacilitiesComponent, canActivate: [AuthGuard]}
-    { path: 'thiet-bi', component: FacilitiesComponent}
+    { path: 'thiet-bi', component: FacilitiesComponent, canActivate: [AuthGuard]}
 ]
 
 @NgModule({

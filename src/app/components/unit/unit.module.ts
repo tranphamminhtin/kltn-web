@@ -2,12 +2,11 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from '@angular/router'
 import { CommonModule } from '@angular/common'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthGuard } from '../../guards/auth.guard';
+import { AuthAdminGuard } from '../../guards/auth-admin.guard';
 import { UnitComponent } from './unit.component';
 
 const routesConfig: Routes = [
-  // { path: 'don-vi', component: UnitComponent, canActivate: [AuthGuard] }
-  { path: 'don-vi', component: UnitComponent }
+  { path: 'don-vi', component: UnitComponent, canActivate: [AuthAdminGuard] }
 ]
 
 @NgModule({

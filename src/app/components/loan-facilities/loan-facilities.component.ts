@@ -29,7 +29,7 @@ export class LoanFacilitiesComponent implements OnInit, OnDestroy {
   arrUsersFilter: User[] = [];
   arrVotes: Vote[] = [];
   arrFilters: LoanFacilities[] = [];
-  arrRights = ['ADMIN', 'MANAGER', 'USER'];
+  arrRights = ['ADMIN', 'MANAGER'];
   arrStateShow = ['YEUCAU', 'CAPPHAT', 'THUHOI'];
   // right = this.arrRights[0];
   right = this.arrRights[JSON.parse(localStorage.getItem('right'))];

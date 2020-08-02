@@ -38,8 +38,12 @@
         </div>
       </div>
     </div>
-    <button type="button" class="btn btn-success btn-md" style="margin: 15px;" (click)="print();"><i class="fa fa-print"></i>
+    <button type="button" class="btn btn-success btn-md" style="margin: 15px;" (click)="print();"><i
+        class="fa fa-print"></i>
       &nbsp;In danh sách</button>
+    <button type="button" class="btn btn-success btn-md" style="margin: 15px;" (click)="printQR();"><i
+        class="fa fa-print"></i>
+      &nbsp;In QR code</button>
     <br>
   </div>
   <div class="btn-group btn-group-justified not-print" *ngIf="right === arrRights[0]">
@@ -58,9 +62,10 @@
     <a class="btn btn-info" [ngClass]="{'active': stateShow === arrStateShow[2]}" (click)="show(arrStateShow[2]);">
       Thiết bị thu hồi</a>
   </div>
-  <table class="table table-bordered" id="tableData">
+  <table class="table table-bordered" id="tableData" [ngClass]="(printClass === typePrint[0])?'print':'not-print'">
     <thead>
       <tr>
+        <th class="index">#</th>
         <th class="name">Tên thiết bị</th>
         <th class="room">Phòng</th>
         <th class="unit">Đơn vị</th>
@@ -73,7 +78,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let facilities of arrFilters">
+      <tr *ngFor="let facilities of arrFilters; index as i">
+        <td>{{ i+1 }}</td>
         <ng-container *ngIf="right === arrRights[0]">
           <td>{{ getNameFacilities(facilities.facilities) }}</td>
           <td>{{ getNameRoom(facilities.room) }}</td>
@@ -243,4 +249,13 @@
       </tr>
     </tbody>
   </table>
+  <div style="text-align: center;" class="hide"
+    [ngClass]="(printClass === typePrint[1])?'print':'not-print'">
+    <div *ngFor="let item of arrFilters;" style="margin-bottom: 50px;">
+      <h2>{{ getNameFacilities(item.facilities)}}</h2>
+      <h4>{{'Phòng: '+getNameRoom(item.room)}}</h4>
+      <ngx-qrcode [qrc-value]="item._id" qrc-class="QRCode" qrc-errorCorrectionLevel="L" qrc-version="2">
+      </ngx-qrcode>
+    </div>
+  </div>
 </div>

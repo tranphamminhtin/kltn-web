@@ -13,7 +13,7 @@ export class LoanFacilitiesService {
     'Authorization': 'Bearer ' + localStorage.getItem('token')
   });
 
-  url = 'http://localhost:3000/loan-facilities';
+  url = 'http://trinhvinhphuc.com:3000/loan-facilities';
 
   getList() {
     return this.http.get(this.url, { headers: this.headers });

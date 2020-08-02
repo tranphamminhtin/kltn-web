@@ -13,7 +13,7 @@ export class UserService {
     'Authorization': 'Bearer ' + localStorage.getItem('token')
   });
 
-  url = 'http://localhost:3000/user';
+  url = 'http://trinhvinhphuc.com:3000/user';
 
   getList() {
     return this.http.get(this.url, { headers: this.headers });

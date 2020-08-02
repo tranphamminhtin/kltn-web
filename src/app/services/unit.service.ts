@@ -13,7 +13,7 @@ export class UnitService {
     'Authorization': 'Bearer ' + localStorage.getItem('token')
   });
 
-  url = 'http://localhost:3000/unit';
+  url = 'http://trinhvinhphuc.com:3000/unit';
 
   getList() {
     return this.http.get(this.url, { headers: this.headers });

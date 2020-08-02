@@ -13,7 +13,7 @@ export class RoomService {
     'Authorization': 'Bearer ' + localStorage.getItem('token')
   });
 
-  url = 'http://localhost:3000/room';
+  url = 'http://trinhvinhphuc.com:3000/room';
 
   getList() {
     return this.http.get(this.url, { headers: this.headers });

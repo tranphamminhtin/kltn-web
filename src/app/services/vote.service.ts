@@ -13,7 +13,7 @@ export class VoteService {
     'Authorization': 'Bearer ' + localStorage.getItem('token')
   });
 
-  url = 'http://localhost:3000/vote';
+  url = 'http://trinhvinhphuc.com:3000/vote';
 
   getList() {
     return this.http.get(this.url, { headers: this.headers });

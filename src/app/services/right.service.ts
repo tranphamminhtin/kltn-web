@@ -13,7 +13,7 @@ export class RightService {
     'Authorization': 'Bearer ' + localStorage.getItem('token')
   });
 
-  url = 'http://localhost:3000/right';
+  url = 'http://trinhvinhphuc.com:3000/right';
 
   getList() {
     return this.http.get(this.url, { headers: this.headers });

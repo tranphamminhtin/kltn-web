@@ -19,7 +19,6 @@ export class FacilitiesComponent implements OnInit, OnDestroy {
   arrTypes: FacilitiesType[] = [];
   arrRights = ['ADMIN', 'MANAGER'];
   filterType = "";
-  // right = this.arrRights[0];
   right = this.arrRights[JSON.parse(localStorage.getItem('right'))];
   subscriptions: Subscription[] = [];
 

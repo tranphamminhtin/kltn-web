@@ -39,6 +39,8 @@ export class LoanFacilitiesComponent implements OnInit, OnDestroy {
   filterUser = "";
   filterFacilities = "";
   subscriptions: Subscription[] = [];
+  typePrint = ['Table', 'QR'];
+  printClass = this.typePrint[0];
 
   constructor(private loanFacilitiesService: LoanFacilitiesService, private facilitiesService: FacilitiesService,
     private roomService: RoomService, private unitService: UnitService, private userService: UserService,
@@ -333,6 +335,13 @@ export class LoanFacilitiesComponent implements OnInit, OnDestroy {
   }
 
   print() {
-    window.print();
+    this.printClass=this.typePrint[0];
+    setTimeout(()=> window.print(), 500);
+    // window.print();
+  }
+
+  printQR() {
+    this.printClass=this.typePrint[1];
+    setTimeout(()=> window.print(), 500);
   }
 }

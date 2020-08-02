@@ -16,7 +16,7 @@ export class AuthAdminGuard implements CanActivate {
 
     if (this.checkSession()) {
       return new Promise((resolve) => {
-        this.http.get('http://localhost:3000/user/verifyToken/', {
+        this.http.get('http://trinhvinhphuc.com:3000/user/verifyToken/', {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('token')

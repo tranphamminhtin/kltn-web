@@ -44,3 +44,12 @@ th.room {
 th.name {
   width: 290px;
 }
+
+th.index {
+  width: 40px;
+}
+
+ngx-qrcode .QRCode img{
+  width: 600px !important;
+  height: 600px !important;
+}

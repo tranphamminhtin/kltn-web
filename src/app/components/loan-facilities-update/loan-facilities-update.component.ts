@@ -31,6 +31,10 @@ export class LoanFacilitiesUpdateComponent implements OnInit, OnDestroy {
   arrRooms: Room[] = [];
   arrUnits: Unit[] = [];
   subscriptions: Subscription[] = [];
+  QRObject = {
+    name: '',
+    room: ''
+  };
 
   constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute,
     private facilitiesService: FacilitiesService, private loanService: LoanFacilitiesService,
@@ -60,7 +64,6 @@ export class LoanFacilitiesUpdateComponent implements OnInit, OnDestroy {
       this.fetchRoom();
       this.fetchUnit();
     }
-    console.log(this.form.value);
   }
 
   ngOnDestroy() {
@@ -123,6 +126,7 @@ export class LoanFacilitiesUpdateComponent implements OnInit, OnDestroy {
           // this.router.navigate(['/login']);
         } else {
           this.form.get('name').setValue(res['message'].name);
+          // this.QRObject.name = res['message'].name;
           this.form.get('image').setValue(res['message'].image);
         }
       }, err => {
@@ -224,5 +228,15 @@ export class LoanFacilitiesUpdateComponent implements OnInit, OnDestroy {
       return 1;
     }
     return 0;
+  }
+
+  printQR() {
+    const roomId = this.form.get('room').value;
+    const index = this.arrRooms.findIndex(room => room._id === roomId);
+    this.QRObject.room = this.arrRooms[index].name;
+    this.QRObject.name = this.form.get('name').value;
+    setTimeout(() => {
+      window.print();
+    }, 500);
   }
 }

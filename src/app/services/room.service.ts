@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import domain from './domain';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class RoomService {
     'Authorization': 'Bearer ' + localStorage.getItem('token')
   });
 
-  url = 'http://trinhvinhphuc.com:3000/room';
+  url = domain + '/room';
 
   getList() {
     return this.http.get(this.url, { headers: this.headers });

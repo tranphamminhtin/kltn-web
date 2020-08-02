@@ -3,7 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { NotificationService } from '../services/notification.service';
-
+import domain from './../services/domain';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class AuthAdminGuard implements CanActivate {
 
     if (this.checkSession()) {
       return new Promise((resolve) => {
-        this.http.get('http://trinhvinhphuc.com:3000/user/verifyToken/', {
+        this.http.get(domain + '/user/verifyToken/', {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('token')

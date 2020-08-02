@@ -16,7 +16,7 @@ import { NgxQRCodeModule } from "ngx-qrcode2";
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider("442316100287-vbbpn8fh1e3v0bqigvse3tjsnp71139g.apps.googleusercontent.com")
+    provider: new GoogleLoginProvider("442316100287-cg5dv3g96o6sjc0piivuthqe3celd5i3.apps.googleusercontent.com")
   }
 ]);
 

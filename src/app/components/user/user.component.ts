@@ -116,10 +116,8 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   filter() {
-    // console.log(this.arrUsers);
     const arr = [...this.arrUsers.map(user => ({ ...user }))];
     this.arrFilters = arr.filter(user => user.right == this.stateShow);
-    // console.log(this.arrFilters);
   }
 
   getNameUnit(_id) {

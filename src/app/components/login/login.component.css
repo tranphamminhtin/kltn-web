@@ -1,12 +1,7 @@
-
-body {
-  background: #456;
-  font-family: "Open Sans", sans-serif;
-}
-
 .login {
   width: 400px;
   margin: 16px auto;
+  padding: 25px;
   font-size: 16px;
 }
 
@@ -75,19 +70,46 @@ body {
   font-size: 80%;
   color: #dc3545;
 }
-.icon-google{
+.icon-google {
   width: auto;
   height: auto;
   background-color: #bb4237;
   margin: -6px 8px -6px -15px;
   padding: 5px;
 }
-.btn-gg{
+.btn-gg {
   color: white;
-  width: 55%;
+  width: 65%;
   display: flex;
   justify-content: center;
   margin: 25px auto;
   font-size: 20px;
-  background-color: #DC4A38;
+  background-color: #dc4a38;
+}
+
+.row{
+  background-color: white;
+  width: 60%;
+  margin: auto;
+  border-radius: 20px;
+}
+
+.content-left{
+  margin-top: 35px;
+  text-align: center;
+}
+
+.content-left img{
+  margin-top: 20px;
+  scale: 0.2;
+}
+
+.background {
+  position: fixed;
+  width: 100vw;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  background: linear-gradient(-135deg, #c850c0, #4158d0);
+  height: 100vh;
 }

@@ -206,22 +206,30 @@ export class LoanFacilitiesComponent implements OnInit, OnDestroy {
 
   getVote(idLoan) {
     const arr = [...this.arrVotes.map(vote => ({ ...vote }))];
-    const votes = arr.filter(vote => vote.loanFacilities == idLoan);
+    const vote = arr.find(vote => vote.loanFacilities == idLoan);
     let loan = this.arrLoanFacilities.find(l => l._id === idLoan);
-    if (votes.length === 0) {
+    if (!vote) {
       loan.percent = 100;
       return 100;
     }
-    let sum = 0;
-    votes.forEach(v => {
-      sum += v.percent.valueOf();
-    })
+    let sum = vote?.percent.valueOf();
+
     if (sum !== 0) {
-      loan.percent = sum / votes.length
-      return sum / votes.length;
+      loan.percent = sum;
+      return sum;
     }
     loan.percent = 100;
     return 100;
+  }
+
+  getComment(idLoan){
+    const arr = [...this.arrVotes.map(vote => ({ ...vote }))];
+    const vote = arr.find(vote => vote.loanFacilities == idLoan);
+    let loan = this.arrLoanFacilities.find(l => l._id === idLoan);
+    if(vote?.note){
+      loan.comment = vote.note;
+    }
+    return loan.comment;
   }
 
   getNameUser(email) {

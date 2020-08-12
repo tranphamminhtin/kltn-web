@@ -45,22 +45,26 @@
         <div class="col-xs-5">
           <div class="col-xs-4" style="text-align: end; margin-top: 4px;">Ngày cấp phát</div>
           <div class="col-xs-8">
-            <input type="date" style="margin: 0;" [(ngModel)]="filterFromDateFrom" (ngModelChange)="changeDate($event, 1)">
+            <input type="date" style="margin: 0;" [(ngModel)]="filterFromDateFrom"
+              (ngModelChange)="changeDate($event, 1)">
             <br />
-            <input type="date" style="margin: 0; margin-top: 10px;" [(ngModel)]="filterFromDateTo" (ngModelChange)="changeDate($event, 2)">
+            <input type="date" style="margin: 0; margin-top: 10px;" [(ngModel)]="filterFromDateTo"
+              (ngModelChange)="changeDate($event, 2)">
           </div>
         </div>
         <div class="col-xs-7">
           <div class="col-xs-2" style="text-align: end; margin-top: 4px;">Ngày thu hồi</div>
           <div class="col-xs-6">
-            <input type="date" style="margin: 0;" [(ngModel)]="filterToDateFrom" (ngModelChange)="changeDate($event, 3)">
+            <input type="date" style="margin: 0;" [(ngModel)]="filterToDateFrom"
+              (ngModelChange)="changeDate($event, 3)">
             <br />
-            <input type="date" style="margin: 0; margin-top: 10px;" [(ngModel)]="filterToDateTo" (ngModelChange)="changeDate($event, 4)">
+            <input type="date" style="margin: 0; margin-top: 10px;" [(ngModel)]="filterToDateTo"
+              (ngModelChange)="changeDate($event, 4)">
           </div>
           <div class="col-xs-4">
-            <button type="button" class="btn btn-primary btn-md" style="margin: 15px; margin-left: -70px;" (click)="resetDate();"><i
-              class="fa fa-refresh"></i>
-            &nbsp;Refresh ngày</button>
+            <button type="button" class="btn btn-primary btn-md" style="margin: 15px; margin-left: -70px;"
+              (click)="resetDate();"><i class="fa fa-refresh"></i>
+              &nbsp;Refresh ngày</button>
           </div>
         </div>
       </div>
@@ -99,22 +103,35 @@
         <th class="user" *ngIf="right ===arrRights[0]">Người quản lý</th>
         <th class="date">Ngày cấp phát</th>
         <th class="date">Ngày thu hồi</th>
-        <th *ngIf="right ===arrRights[1]">Ghi chú</th>
+        <th>Ghi chú</th>
         <th class="state">Tình trạng</th>
+        <th>Đánh giá</th>
         <th class="other">Thao tác</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let facilities of arrFilters; index as i">
         <td>{{ i+1 }}</td>
+        <td>{{ facilities.name || getNameFacilities(facilities.facilities) }}</td>
+        <td>{{ facilities.nameRoom || getNameRoom(facilities.room) }}</td>
+        <td>{{ facilities.nameUnit || getNameUnit(facilities.unit) }}</td>
+        <td *ngIf="right ===arrRights[0]">{{ facilities.nameUser || getNameUser(facilities.manager) }}</td>
+        <td>{{ facilities.from | date:"dd/MM/yyyy"}}</td>
+        <td>{{ facilities.to | date:"dd/MM/yyyy"}}</td>
+        <td>
+          <div *ngIf="facilities.note">
+            <br>
+            <i class="fa fa-file-text fa-lg hover-span" aria-hidden="true" attr.data-content="{{facilities.note}}"></i>
+          </div>
+        </td>
+        <td>{{ (facilities.percent || getVote(facilities._id)) + ' %'}}</td>
+        <td>
+          <div *ngIf="facilities.comment || getComment(facilities._id)">
+            <br />
+            <i class="fa fa-align-justify fa-lg hover-span" aria-hidden="true" attr.data-content="{{facilities.comment || getComment(facilities._id)}}"></i>
+          </div>
+        </td>
         <ng-container *ngIf="right === arrRights[0]">
-          <td>{{ facilities.name || getNameFacilities(facilities.facilities) }}</td>
-          <td>{{ facilities.nameRoom || getNameRoom(facilities.room) }}</td>
-          <td>{{ facilities.nameUnit || getNameUnit(facilities.unit) }}</td>
-          <td>{{ facilities.nameUser || getNameUser(facilities.manager) }}</td>
-          <td>{{ facilities.from | date:"dd/MM/yyyy"}}</td>
-          <td>{{ facilities.to | date:"dd/MM/yyyy"}}</td>
-          <td>{{ (facilities.percent || getVote(facilities._id)) + ' %'}}</td>
           <td class="other">
             <ng-container *ngIf="stateShow === arrStateShow[0]">
               <button type="button" class="btn btn-info" (click)="loan(facilities._id)"><i class="fa fa-sign-in"></i>
@@ -192,15 +209,7 @@
             </div>
           </td>
         </ng-container>
-
         <ng-container *ngIf="right === arrRights[1]">
-          <td>{{ getNameFacilities(facilities.facilities) }}</td>
-          <td>{{ getNameRoom(facilities.room) }}</td>
-          <td>{{ getNameUnit(facilities.unit) }}</td>
-          <td>{{ facilities.from | date:"dd/MM/yyyy"}}</td>
-          <td>{{ facilities.to | date:"dd/MM/yyyy"}}</td>
-          <td>{{ facilities.note }}</td>
-          <td>{{ getVote(facilities._id) + ' %'}}</td>
           <td class="other">
             <ng-container *ngIf="stateShow === arrStateShow[0]">
               <button type="button" class="btn btn-info " data-toggle="modal"

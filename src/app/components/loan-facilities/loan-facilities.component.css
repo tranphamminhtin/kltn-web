@@ -33,20 +33,40 @@ th.date {
   width: 110px;
 }
 th.user {
-  width: 200px;
+  width: 170px;
 }
 th.unit {
-  width: 200px;
+  width: 180px;
 }
 th.room {
-  width: 115px;
+  width: 80px;
 }
 th.name {
-  width: 290px;
+  width: 190px;
 }
 
 th.index {
   width: 40px;
+}
+
+i.hover-span{
+  position: relative;
+}
+
+i[data-content].hover-span:hover::after{
+  content: attr(data-content);
+  position: absolute;
+  width: auto;
+  min-width: 80px;
+  opacity: 0.6;
+  background-color: black;
+  color: white;
+  padding: 10px;
+  bottom: 150%;
+  left: -50px;
+  font-size: 12px;
+  border-radius: 10px;
+  display: block;
 }
 
 ngx-qrcode .QRCode img{

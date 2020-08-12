@@ -14,6 +14,7 @@ export class LoanFacilitiesViewModel {
     public to: Date,
     public state: Number,
     public percent: Number,
+    public comment: string,
     public request: Boolean = false,
   ) {}
 }

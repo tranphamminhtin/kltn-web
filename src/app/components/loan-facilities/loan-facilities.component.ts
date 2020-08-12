@@ -13,6 +13,7 @@ import { Room } from 'src/app/models/room.model';
 import { Unit } from 'src/app/models/unit.model';
 import { User } from 'src/app/models/user.model';
 import { Vote } from 'src/app/models/vote.model';
+import { LoanFacilitiesViewModel } from 'src/app/models/loan.viewmodel';
 
 @Component({
   selector: 'app-loan-facilities',
@@ -21,16 +22,23 @@ import { Vote } from 'src/app/models/vote.model';
 })
 export class LoanFacilitiesComponent implements OnInit, OnDestroy {
 
-  arrLoanFacilities: LoanFacilities[] = [];
+  arrLoanFacilities: LoanFacilitiesViewModel[] = [];
   arrFacilities: Facilities[] = [];
   arrRooms: Room[] = [];
   arrUnits: Unit[] = [];
   arrUsers: User[] = [];
   arrUsersFilter: User[] = [];
   arrVotes: Vote[] = [];
-  arrFilters: LoanFacilities[] = [];
+  arrFilters: LoanFacilitiesViewModel[] = [];
   arrRights = ['ADMIN', 'MANAGER'];
   arrStateShow = ['YEUCAU', 'CAPPHAT', 'THUHOI'];
+  arrPercent = [
+    { value: 0, label: 'Tình trạng' },
+    { value: 1, label: '≥70%' },
+    { value: 2, label: '50% - 70%' },
+    { value: 3, label: '30%-50%' },
+    { value: 4, label: '≤30%' }
+  ];
   // right = this.arrRights[0];
   right = this.arrRights[JSON.parse(localStorage.getItem('right'))];
   stateShow = this.arrStateShow[0];
@@ -38,6 +46,11 @@ export class LoanFacilitiesComponent implements OnInit, OnDestroy {
   filterUnit = "";
   filterUser = "";
   filterFacilities = "";
+  filterPercent = 0;
+  filterFromDateFrom: Date = null;
+  filterFromDateTo: Date = null;
+  filterToDateFrom: Date = null;
+  filterToDateTo: Date = null;
   subscriptions: Subscription[] = [];
   typePrint = ['Table', 'QR'];
   printClass = this.typePrint[0];
@@ -163,43 +176,61 @@ export class LoanFacilitiesComponent implements OnInit, OnDestroy {
 
   getNameFacilities(_id) {
     const facilities = this.arrFacilities.find(f => f._id === _id);
-    if (facilities)
+    let loan = this.arrLoanFacilities.find(l => l.facilities === _id);
+    if (facilities) {
+      loan.name = facilities.name;
       return facilities.name;
+    }
     return '';
   }
 
   getNameRoom(_id) {
     const room = this.arrRooms.find(r => r._id === _id);
-    if (room)
+    let loan = this.arrLoanFacilities.find(l => l.room === _id);
+    if (room) {
+      loan.nameRoom = room.name;
       return room.name;
+    }
     return '';
   }
 
   getNameUnit(_id) {
     const unit = this.arrUnits.find(u => u._id === _id);
-    if (unit)
+    let loan = this.arrLoanFacilities.find(l => l.unit === _id);
+    if (unit) {
+      loan.nameUnit = unit.name;
       return unit.name;
+    }
     return '';
   }
 
   getVote(idLoan) {
     const arr = [...this.arrVotes.map(vote => ({ ...vote }))];
     const votes = arr.filter(vote => vote.loanFacilities == idLoan);
-    if (votes.length === 0)
+    let loan = this.arrLoanFacilities.find(l => l._id === idLoan);
+    if (votes.length === 0) {
+      loan.percent = 100;
       return 100;
+    }
     let sum = 0;
     votes.forEach(v => {
       sum += v.percent.valueOf();
     })
-    if (sum !== 0)
+    if (sum !== 0) {
+      loan.percent = sum / votes.length
       return sum / votes.length;
+    }
+    loan.percent = 100;
     return 100;
   }
 
   getNameUser(email) {
     const user = this.arrUsers.find(u => u.email === email);
-    if (user)
+    let loan = this.arrLoanFacilities.find(l => l.manager === email);
+    if (user) {
+      loan.nameUser = user.name;
       return user.name;
+    }
     return '';
   }
 
@@ -256,6 +287,36 @@ export class LoanFacilitiesComponent implements OnInit, OnDestroy {
       this.arrFilters = this.arrFilters.filter(f => f.manager === this.filterUser);
     if (this.filterFacilities !== "")
       this.arrFilters = this.arrFilters.filter(f => f.facilities === this.filterFacilities);
+
+    if (this.filterFromDateFrom !== null)
+      this.arrFilters = this.arrFilters.filter(f => new Date(f.from).getTime() >= new Date(this.filterFromDateFrom).getTime());
+    if (this.filterFromDateTo !== null)
+      this.arrFilters = this.arrFilters.filter(f => new Date(f.from).getTime() <= new Date(this.filterFromDateTo).getTime());
+    if (this.filterToDateFrom !== null)
+      this.arrFilters = this.arrFilters.filter(f => new Date(f.to).getTime() >= new Date(this.filterToDateFrom).getTime());
+    if (this.filterToDateTo !== null)
+      this.arrFilters = this.arrFilters.filter(f => new Date(f.to).getTime() <= new Date(this.filterToDateTo).getTime());
+
+    switch (this.filterPercent) {
+      case 0: break;
+      case 1: {
+        this.arrFilters = this.arrFilters.filter(f => f.percent === null || f.percent >= 70);
+        break;
+      }
+      case 2: {
+        this.arrFilters = this.arrFilters.filter(f => f.percent === null || (f.percent >= 50 && f.percent <= 70));
+        break;
+      }
+      case 3: {
+        this.arrFilters = this.arrFilters.filter(f => f.percent === null || (f.percent >= 30 && f.percent <= 50));
+        break;
+      }
+      case 4: {
+        this.arrFilters = this.arrFilters.filter(f => f.percent === null || f.percent <= 30);
+        break;
+      }
+      default: break;
+    }
     this.arrFilters.sort(this.sortById);
   }
 
@@ -322,6 +383,32 @@ export class LoanFacilitiesComponent implements OnInit, OnDestroy {
     this.filter();
   }
 
+  changePercent(value) {
+    this.filterPercent = Number(value);
+    this.filter();
+  }
+
+  changeDate(date: Date, type: number) {
+    if (type == 1)
+      this.filterFromDateFrom = date;
+    if (type == 2)
+      this.filterFromDateTo = date;
+    if (type == 3)
+      this.filterToDateFrom = date;
+    if (type == 4)
+      this.filterToDateTo = date;
+    if (date != null)
+      this.filter();
+  }
+
+  resetDate() {
+    this.filterFromDateFrom = null;
+    this.filterFromDateTo = null;
+    this.filterToDateFrom = null;
+    this.filterToDateTo = null;
+    this.filter();
+  }
+
   sortById(a, b) {
     var idA = a._id; // bỏ qua hoa thường
     var idB = b._id;
@@ -335,13 +422,12 @@ export class LoanFacilitiesComponent implements OnInit, OnDestroy {
   }
 
   print() {
-    this.printClass=this.typePrint[0];
-    setTimeout(()=> window.print(), 500);
-    // window.print();
+    this.printClass = this.typePrint[0];
+    setTimeout(() => window.print(), 500);
   }
 
   printQR() {
-    this.printClass=this.typePrint[1];
-    setTimeout(()=> window.print(), 500);
+    this.printClass = this.typePrint[1];
+    setTimeout(() => window.print(), 500);
   }
 }

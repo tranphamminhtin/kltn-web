@@ -120,15 +120,19 @@
         <td>{{ facilities.to | date:"dd/MM/yyyy"}}</td>
         <td>
           <div *ngIf="facilities.note">
+            <span class="hide print">{{facilities.note}}</span>
             <br>
-            <i class="fa fa-file-text fa-lg hover-span" aria-hidden="true" attr.data-content="{{facilities.note}}"></i>
+            <i class="fa fa-file-text fa-lg hover-span not-print" aria-hidden="true"
+              attr.data-content="{{facilities.note}}"></i>
           </div>
         </td>
         <td>{{ (facilities.percent || getVote(facilities._id)) + ' %'}}</td>
         <td>
           <div *ngIf="facilities.comment || getComment(facilities._id)">
+            <span class="hide print">{{facilities.comment || getComment(facilities._id)}}</span>
             <br />
-            <i class="fa fa-align-justify fa-lg hover-span" aria-hidden="true" attr.data-content="{{facilities.comment || getComment(facilities._id)}}"></i>
+            <i class="fa fa-align-justify fa-lg hover-span not-print" aria-hidden="true"
+              attr.data-content="{{facilities.comment || getComment(facilities._id)}}"></i>
           </div>
         </td>
         <ng-container *ngIf="right === arrRights[0]">

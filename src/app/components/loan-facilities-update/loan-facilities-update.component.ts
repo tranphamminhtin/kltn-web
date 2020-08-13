@@ -57,13 +57,11 @@ export class LoanFacilitiesUpdateComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.paramMap.get('id').toString();
-    this.right = Right.Admin;
-    if (this.right == Right.Admin) {
-      this.getLoanFacilities();
-      this.fetchUser();
-      this.fetchRoom();
-      this.fetchUnit();
-    }
+    this.right = JSON.parse(localStorage.getItem('right'));
+    this.getLoanFacilities();
+    this.fetchUser();
+    this.fetchRoom();
+    this.fetchUnit();
   }
 
   ngOnDestroy() {
@@ -144,6 +142,9 @@ export class LoanFacilitiesUpdateComponent implements OnInit, OnDestroy {
     }
     this.form.get('from').setValue(formatDate(object['from'], 'yyyy-MM-dd', 'en'));
     this.form.get('to').setValue(formatDate(object['to'], 'yyyy-MM-dd', 'en'));
+    if(this.right == Right.Manager){
+      this.form.disable();
+    }
   }
 
   fetchUser() {

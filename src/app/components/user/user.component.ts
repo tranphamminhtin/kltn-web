@@ -33,6 +33,11 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   remove(email) {
+    const currentEmail = localStorage.getItem('email');
+    if(email === currentEmail){
+      this.notificationService.showInfor('Bạn không thể xóa tài khoản hiện tại');
+      return;
+    }
     const sub = this.userService.remove(email).subscribe(res => {
       if (!res['success']) {
         sub.unsubscribe();

@@ -41,6 +41,7 @@ export class LoanFacilitiesComponent implements OnInit, OnDestroy {
   ];
   // right = this.arrRights[0];
   right = this.arrRights[JSON.parse(localStorage.getItem('right'))];
+  email = localStorage.getItem('email');
   stateShow = this.arrStateShow[0];
   filterRoom = "";
   filterUnit = "";
@@ -83,6 +84,9 @@ export class LoanFacilitiesComponent implements OnInit, OnDestroy {
         // this.router.navigate(['/login']);
       } else {
         this.arrLoanFacilities = res['message'];
+        if (this.right === this.arrRights[1]) {
+          this.arrLoanFacilities = this.arrLoanFacilities.filter(f => f.manager === this.email);
+        }
       }
     }, err => {
       console.log(err);
@@ -222,11 +226,11 @@ export class LoanFacilitiesComponent implements OnInit, OnDestroy {
     return 100;
   }
 
-  getComment(idLoan){
+  getComment(idLoan) {
     const arr = [...this.arrVotes.map(vote => ({ ...vote }))];
     const vote = arr.find(vote => vote.loanFacilities == idLoan);
     let loan = this.arrLoanFacilities.find(l => l._id === idLoan);
-    if(vote?.note){
+    if (vote?.note) {
       loan.comment = vote.note;
     }
     return loan.comment;

@@ -39,7 +39,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.form.valid) {
-      console.log(this.form.value);
       this.login(this.form.value);
     }
     else {

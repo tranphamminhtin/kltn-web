@@ -23,6 +23,8 @@ export class LoanFacilitiesCreateComponent implements OnInit, OnDestroy {
   form: FormGroup;
   id = '';
   right;
+  currentEmail = localStorage.getItem('email');
+  user: User;
   arrUsers: User[] = [];
   arrUsersFilters: User[] = [];
   arrRooms: Room[] = [];
@@ -167,6 +169,9 @@ export class LoanFacilitiesCreateComponent implements OnInit, OnDestroy {
   }
 
   changeUnit(idUnit) {
+    if(this.user.unit == idUnit){
+      return;
+    }
     const arr = [...this.arrUsers.map(user => ({ ...user }))];
     this.arrUsersFilters = arr.filter(user => user.right == Right.Manager && user.unit == idUnit);
     if (this.arrUsersFilters.length === 0) {
@@ -196,6 +201,7 @@ export class LoanFacilitiesCreateComponent implements OnInit, OnDestroy {
         this.notificationService.showError(res['message']);
         // this.router.navigate(['/login']);
       } else {
+        this.user = res['message'];
         this.form.get('manager').setValue(res['message'].email);
         this.form.get('manager').disable();
         this.form.get('unit').setValue(res['message'].unit);

@@ -169,7 +169,7 @@ export class LoanFacilitiesCreateComponent implements OnInit, OnDestroy {
   }
 
   changeUnit(idUnit) {
-    if(this.user.unit == idUnit){
+    if(this.user && this.user.unit == idUnit){
       return;
     }
     const arr = [...this.arrUsers.map(user => ({ ...user }))];

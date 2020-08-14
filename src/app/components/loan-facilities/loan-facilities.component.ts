@@ -256,6 +256,8 @@ export class LoanFacilitiesComponent implements OnInit, OnDestroy {
     let facilities = this.arrFilters.find(f => f._id === _id)
     if (fa) {
       if (this.right === this.arrRights[0]) {
+        fa.from = new Date(Date.now());
+        facilities.from = new Date(Date.now());
         fa.request = false;
         facilities.request = false;
       } else {

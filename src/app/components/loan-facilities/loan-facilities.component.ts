@@ -252,8 +252,8 @@ export class LoanFacilitiesComponent implements OnInit, OnDestroy {
   }
 
   loan(_id) {
-    const fa = this.arrLoanFacilities.find(f => f._id === _id);
-    const facilities = this.arrFilters.find(f => f._id === _id)
+    let fa = this.arrLoanFacilities.find(f => f._id === _id);
+    let facilities = this.arrFilters.find(f => f._id === _id)
     if (fa) {
       if (this.right === this.arrRights[0]) {
         fa.request = false;
@@ -270,9 +270,10 @@ export class LoanFacilitiesComponent implements OnInit, OnDestroy {
   }
 
   revoke(_id) {
-    const fa = this.arrLoanFacilities.find(f => f._id === _id);
+    let fa = this.arrLoanFacilities.find(f => f._id === _id);
     if (fa) {
       fa.state = 1;
+      fa.to = new Date(Date.now());
       this.update(_id, fa, 'Thu hồi');
     }
   }
